@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useCallback } from 'react'
 import { MENU, LOCATIONS, SPECIALS, MILL_AVE_COCKTAILS, PRESS, IMG, mapsUrl } from './data/menu'
 import { getCart, saveCart, addOrder, addCateringRequest } from './data/store'
 import Admin from './pages/Admin'
+import MemberPortal from './pages/MemberPortal'
 
 /* ── Reveal ── */
 function Reveal({ children, delay = 0, style = {} }) {
@@ -12,7 +13,7 @@ function Reveal({ children, delay = 0, style = {} }) {
 }
 
 export default function App() {
-  const [page, setPage] = useState(window.location.hash === '#admin' ? 'admin' : 'store')
+  const [page, setPage] = useState(window.location.hash === '#admin' ? 'admin' : window.location.hash === '#rewards' ? 'rewards' : 'store')
   const [heroVis, setHeroVis] = useState(false)
   const [activeCategory, setActiveCategory] = useState('Tacos')
   const [cart, setCart] = useState(getCart)
@@ -27,7 +28,7 @@ export default function App() {
 
   useEffect(() => { setTimeout(() => setHeroVis(true), 200) }, [])
   useEffect(() => { saveCart(cart) }, [cart])
-  useEffect(() => { const fn = () => setPage(window.location.hash === '#admin' ? 'admin' : 'store'); window.addEventListener('hashchange', fn); return () => window.removeEventListener('hashchange', fn) }, [])
+  useEffect(() => { const fn = () => setPage(window.location.hash === '#admin' ? 'admin' : window.location.hash === '#rewards' ? 'rewards' : 'store'); window.addEventListener('hashchange', fn); return () => window.removeEventListener('hashchange', fn) }, [])
 
   const doAddToCart = useCallback((item) => {
     setCart(prev => { const ex = prev.find(c => c.id === item.id); if (ex) return prev.map(c => c.id === item.id ? { ...c, qty: c.qty + 1 } : c); return [...prev, { ...item, qty: 1 }] })
@@ -40,6 +41,7 @@ export default function App() {
   const handleCheckout = (form) => { const order = addOrder({ name: form.name, phone: form.phone, email: form.email, items: cart.map(c => ({ name: c.name, qty: c.qty, price: c.price })), total: cartTotal, type: orderType, location: LOCATIONS[pickupLocation].name, notes: form.notes }); setOrderConfirm(order); clearCart(); setCheckoutOpen(false) }
 
   if (page === 'admin') return <Admin onBack={() => { window.location.hash = ''; setPage('store') }} />
+  if (page === 'rewards') return <MemberPortal onBack={() => { window.location.hash = ''; setPage('store') }} />
 
   return (
     <div style={{ background: '#fff' }}>
@@ -355,7 +357,7 @@ export default function App() {
             {LOCATIONS.map((l, i) => (
               <Reveal key={l.id} delay={i * 60}>
                 <div style={{ padding: 20, borderRight: i % 2 === 0 ? B : 'none', borderBottom: i < 4 ? B : 'none' }}>
-                  {i === 0 && <div style={{ height: 120, overflow: 'hidden', border: B, marginBottom: 12 }}><img src={IMG.storefront} alt={l.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} loading="lazy" /></div>}
+                  {locationImg(i) && <div style={{ height: 120, overflow: 'hidden', border: B, marginBottom: 12 }}><img src={locationImg(i)} alt={l.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} loading="lazy" /></div>}
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 }}>
                     <span style={{ fontFamily: V.font_display, fontSize: 22 }}>{l.name.toUpperCase()}</span>
                     {l.flag && <span style={{ fontSize: 9, fontWeight: 700, padding: '2px 6px', background: '#e93d3d', color: '#fff' }}>{l.flag}</span>}
@@ -416,7 +418,7 @@ export default function App() {
         <img src={IMG.logo} alt="Taco Boy's" style={{ height: 50, margin: '0 auto 12px' }} />
         <div style={{ fontFamily: V.font_mono, fontSize: 9, letterSpacing: '0.2em', color: '#999', marginBottom: 16 }}>SONORAN STYLE SINCE 2019</div>
         <div style={{ display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap', marginBottom: 16 }}>
-          {[['Menu', '#menu'], ['Catering', '#catering'], ['Locations', '#locations'], ['Instagram', 'https://instagram.com/aztacoboys']].map(([l, h]) => (
+          {[['Menu', '#menu'], ['Catering', '#catering'], ['Locations', '#locations'], ['My Rewards', '#rewards'], ['Instagram', 'https://instagram.com/aztacoboys']].map(([l, h]) => (
             <a key={l} href={h} target={h.startsWith('http') ? '_blank' : undefined} rel={h.startsWith('http') ? 'noopener' : undefined} style={{ fontFamily: V.font_display, fontSize: 16, color: '#000' }}>{l.toUpperCase()}</a>
           ))}
           <a href="#admin" style={{ fontFamily: V.font_display, fontSize: 16, color: '#ccc' }}>ADMIN</a>
@@ -536,6 +538,7 @@ function Nav({ cartCount, onCartClick, mobileNav, setMobileNav }) {
         </a>
         <div style={{ display: 'flex', gap: 20, alignItems: 'center' }} className="nav-desktop">
           {['Menu', 'Catering', 'Locations'].map(l => <a key={l} href={`#${l.toLowerCase()}`} style={{ fontFamily: V.font_display, fontSize: 18, color: scrolled ? '#000' : '#fff' }}>{l.toUpperCase()}</a>)}
+          <a href="#rewards" style={{ fontFamily: V.font_display, fontSize: 18, color: '#F5A623' }}>MY REWARDS</a>
           <button onClick={onCartClick} style={{ padding: '8px 20px', background: '#e93d3d', color: '#fff', fontFamily: V.font_display, fontSize: 16, fontWeight: 700, border: 'none', display: 'flex', alignItems: 'center', gap: 6 }}>🌮 {cartCount > 0 ? cartCount : 'ORDER'}</button>
         </div>
         <div className="nav-mobile" style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
@@ -552,6 +555,11 @@ function Nav({ cartCount, onCartClick, mobileNav, setMobileNav }) {
 }
 
 /* ═══ CONSTANTS ═══ */
+
+function locationImg(i) {
+  const imgs = [IMG.storefront, IMG.interior[0], IMG.food[0], IMG.interior[1], IMG.beerWall[0], IMG.interior[2]]
+  return imgs[i] || null
+}
 
 const B = '2px solid #000'
 const V = { font_display: "'Squada One', cursive", font_body: "'Albert Sans', sans-serif", font_mono: "'JetBrains Mono', monospace" }
