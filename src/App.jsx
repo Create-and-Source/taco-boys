@@ -108,6 +108,9 @@ export default function App() {
       {/* Catering modal */}
       {cateringOpen && <CateringModal onClose={() => setCateringOpen(false)} />}
 
+      {/* Sticky order bar */}
+      <StickyOrderBar cartCount={cartCount} onCartClick={() => setCartOpen(true)} />
+
       {/* ═══ HERO ═══ */}
       <section style={hero.wrap}>
         <img src={IMG.hero} alt="" style={hero.bgImg} />
@@ -146,25 +149,57 @@ export default function App() {
         ))}
       </div></div>
 
-      {/* ═══ ABOUT ═══ */}
-      <section style={{ padding: '80px 24px', background: '#241A14' }}>
-        <div style={{ maxWidth: 900, margin: '0 auto', textAlign: 'center' }}>
+      {/* ═══ OUR STORY ═══ */}
+      <section id="story" style={{ padding: '100px 24px', background: '#241A14' }}>
+        <div style={{ maxWidth: 1000, margin: '0 auto' }}>
+          <Reveal><div style={tag}>OUR STORY</div><h2 style={h2}>Started Outside a Liquor Store.<br /><span style={{ color: '#E8A840' }}>Now We're on Netflix.</span></h2></Reveal>
+          <div style={{ display: 'flex', gap: 40, alignItems: 'center', flexWrap: 'wrap', marginTop: 40 }}>
+            <Reveal style={{ flex: '1 1 400px', minWidth: 280 }}>
+              <div style={{ borderRadius: 14, overflow: 'hidden', height: 340 }}>
+                <img src={IMG.storefront} alt="Taco Boy's Roosevelt Row" style={{ width: '100%', height: '100%', objectFit: 'cover' }} loading="lazy" />
+              </div>
+            </Reveal>
+            <Reveal delay={200} style={{ flex: '1 1 400px', minWidth: 280 }}>
+              <p style={{ fontSize: 16, lineHeight: 2, color: '#BFA98E', marginBottom: 20 }}>
+                In 2019, Juan Francisco Cornejo Sr. set up a grill outside Mr. Lee's liquor store on Roosevelt Row.
+                His son Jr. joined him. They had mesquite charcoal, skirt steak from Sonora, and handmade tortillas.
+                That's it. No restaurant. No building. Just fire, meat, and a dream.
+              </p>
+              <p style={{ fontSize: 16, lineHeight: 2, color: '#BFA98E', marginBottom: 24 }}>
+                Word spread. Lines formed. They got a spot on Roosevelt. Then a second location. Then a third.
+                Netflix came calling for <em style={{ color: '#C4371A' }}>Taco Chronicles</em>. Now there are 6 Taco Boy's across the Valley —
+                and they just opened <strong style={{ color: '#FFF8F0' }}>Marisco Boys</strong>, a seafood restaurant, in 2025.
+              </p>
+              <div style={{ display: 'flex', gap: 28, flexWrap: 'wrap' }}>
+                {[{ val: '6', l: 'LOCATIONS' }, { val: '94K', l: 'FOLLOWERS' }, { val: '1K+', l: 'REVIEWS' }, { val: '🔥', l: 'NETFLIX' }].map(s2 => (
+                  <div key={s2.l}>
+                    <div style={{ fontFamily: "'Bebas Neue'", fontSize: 28, color: '#FFF8F0', letterSpacing: '0.05em' }}>{s2.val}</div>
+                    <div style={{ fontFamily: "'JetBrains Mono'", fontSize: 9, letterSpacing: '0.15em', color: '#8A7460' }}>{s2.l}</div>
+                  </div>
+                ))}
+              </div>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ REVIEWS / SOCIAL PROOF ═══ */}
+      <section style={{ padding: '60px 24px' }}>
+        <div style={{ maxWidth: 1000, margin: '0 auto' }}>
           <Reveal>
-            <div style={{ display: 'flex', justifyContent: 'center', gap: 40, flexWrap: 'wrap', marginBottom: 32 }}>
-              {[{ val: '6', l: 'LOCATIONS' }, { val: '94K', l: 'FOLLOWERS' }, { val: '2019', l: 'FOUNDED' }, { val: '1K+', l: 'YELP REVIEWS' }].map(s2 => (
-                <div key={s2.l} style={{ textAlign: 'center' }}>
-                  <div style={{ fontFamily: "'Bebas Neue'", fontSize: 36, color: '#FFF8F0', letterSpacing: '0.05em' }}>{s2.val}</div>
-                  <div style={{ fontFamily: "'JetBrains Mono'", fontSize: 10, letterSpacing: '0.2em', color: '#8A7460' }}>{s2.l}</div>
+            <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', justifyContent: 'center' }}>
+              {[
+                { text: 'Best carne asada in the Valley. Not even close.', src: '— Yelp Review, 5 stars' },
+                { text: 'The mesquite flavor is insane. Tortillas are fresh. Salsa bar is legendary.', src: '— Google Review' },
+                { text: 'If you haven\'t been to Taco Boy\'s you\'re missing out on life.', src: '— Phoenix New Times reader' },
+                { text: 'We go every single week. The vampiros are addictive.', src: '— Yelp Review, 5 stars' },
+              ].map((r, i) => (
+                <div key={i} style={{ flex: '1 1 220px', background: '#2E221A', border: '1px solid #4A3828', borderRadius: 12, padding: 20, maxWidth: 280 }}>
+                  <div style={{ fontSize: 14, color: '#FFF8F0', lineHeight: 1.6, fontStyle: 'italic', marginBottom: 10 }}>"{r.text}"</div>
+                  <div style={{ fontSize: 11, color: '#8A7460' }}>{r.src}</div>
                 </div>
               ))}
             </div>
-          </Reveal>
-          <Reveal delay={200}>
-            <p style={{ fontSize: 16, lineHeight: 1.8, color: '#BFA98E', maxWidth: 600, margin: '0 auto' }}>
-              Started in 2019 on Roosevelt Row by father-and-son duo Juan Francisco Cornejo Sr. and Jr.
-              What began outside a liquor store became a Phoenix phenomenon — 6 locations, a Netflix feature
-              on <em style={{ color: '#C4371A' }}>Taco Chronicles</em>, and the best mesquite-grilled carne asada in Arizona.
-            </p>
           </Reveal>
         </div>
       </section>
@@ -206,7 +241,9 @@ export default function App() {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))', gap: 12 }}>
             {MENU.find(c => c.category === activeCategory)?.items.map((item, i) => (
               <Reveal key={item.id} delay={i * 60}>
-                <div style={{ background: '#2E221A', border: `1px solid ${addedFlash === item.id ? '#C4371A' : '#4A3828'}`, borderRadius: 12, padding: 18, transition: 'border-color 0.3s ease' }}>
+                <div style={{ background: '#2E221A', border: `1px solid ${addedFlash === item.id ? '#C4371A' : '#4A3828'}`, borderRadius: 12, overflow: 'hidden', transition: 'border-color 0.3s ease' }}>
+                  {item.img && <div style={{ height: 140, overflow: 'hidden' }}><img src={item.img} alt={item.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} loading="lazy" /></div>}
+                  <div style={{ padding: 18 }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 12, marginBottom: 12 }}>
                     <div>
                       <div style={{ fontSize: 16, fontWeight: 700, color: '#FFF8F0', marginBottom: 4 }}>{item.name}{item.hot && <span style={{ marginLeft: 6, fontSize: 12 }}>🔥</span>}</div>
@@ -214,9 +251,10 @@ export default function App() {
                     </div>
                     <div style={{ fontFamily: "'Bebas Neue'", fontSize: 22, color: '#C4371A', letterSpacing: '0.05em', flexShrink: 0 }}>${item.price}</div>
                   </div>
-                  <button onClick={() => doAddToCart(item)} style={{ width: '100%', padding: '10px 0', borderRadius: 100, border: `1px solid ${addedFlash === item.id ? '#C4371A' : '#4A3828'}`, fontSize: 12, fontWeight: 600, cursor: 'pointer', transition: 'all 0.3s ease', fontFamily: "'DM Sans'", background: addedFlash === item.id ? 'rgba(212,43,32,0.1)' : 'transparent', color: addedFlash === item.id ? '#C4371A' : '#BFA98E' }}>
+                  <button onClick={() => doAddToCart(item)} style={{ width: '100%', padding: '10px 0', borderRadius: 100, border: `1px solid ${addedFlash === item.id ? '#C4371A' : '#4A3828'}`, fontSize: 12, fontWeight: 600, cursor: 'pointer', transition: 'all 0.3s ease', fontFamily: "'DM Sans'", background: addedFlash === item.id ? 'rgba(196,55,26,0.15)' : 'transparent', color: addedFlash === item.id ? '#C4371A' : '#BFA98E' }}>
                     {addedFlash === item.id ? '✓ Added' : '+ Add to Order'}
                   </button>
+                  </div>
                 </div>
               </Reveal>
             ))}
@@ -494,6 +532,38 @@ function CateringModal({ onClose }) {
         <button type="submit" style={{ ...hero.btnPrimary, width: '100%', textAlign: 'center', marginTop: 8 }}>Submit Request</button>
       </form>
     </div></div>
+  )
+}
+
+function StickyOrderBar({ cartCount, onCartClick }) {
+  const [show, setShow] = useState(false)
+  useEffect(() => {
+    const fn = () => setShow(window.scrollY > window.innerHeight * 0.8)
+    window.addEventListener('scroll', fn, { passive: true })
+    return () => window.removeEventListener('scroll', fn)
+  }, [])
+  return (
+    <div style={{
+      position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 190,
+      transform: show ? 'translateY(0)' : 'translateY(100%)',
+      transition: 'transform 0.4s cubic-bezier(.16,1,.3,1)',
+    }}>
+      <div style={{
+        background: 'linear-gradient(180deg, transparent, rgba(28,20,16,0.95) 30%)',
+        padding: '24px 24px 20px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 16,
+        backdropFilter: 'blur(12px)',
+      }}>
+        <span style={{ fontSize: 16, color: '#E8A840' }}>🔥</span>
+        <span style={{ fontSize: 14, color: '#FFF8F0', fontWeight: 500 }}>Hungry?</span>
+        <button onClick={onCartClick} style={{
+          padding: '12px 28px', borderRadius: 100, background: '#C4371A', color: '#fff',
+          fontSize: 13, fontWeight: 700, letterSpacing: '0.05em', border: 'none', cursor: 'pointer',
+          boxShadow: '0 4px 20px rgba(196,55,26,0.4)', textTransform: 'uppercase',
+        }}>
+          {cartCount > 0 ? `View Order (${cartCount})` : 'Order Pickup or Delivery'}
+        </button>
+      </div>
+    </div>
   )
 }
 
