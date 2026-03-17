@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
-import { MENU, LOCATIONS, SPECIALS, MILL_AVE_COCKTAILS, PRESS, mapsUrl } from './data/menu'
+import { MENU, LOCATIONS, SPECIALS, MILL_AVE_COCKTAILS, PRESS, IMG, mapsUrl } from './data/menu'
 import { getCart, saveCart, addOrder, addCateringRequest } from './data/store'
 import Admin from './pages/Admin'
 
@@ -110,6 +110,8 @@ export default function App() {
 
       {/* ═══ HERO ═══ */}
       <section style={hero.wrap}>
+        <img src={IMG.hero} alt="" style={hero.bgImg} />
+        <div style={hero.darkOverlay} />
         <div style={hero.fireOverlay} /><div style={hero.smokeOverlay} />
         <div style={hero.content}>
           <div style={{ ...hero.tag, opacity: heroVis ? 1 : 0, transform: heroVis ? 'none' : 'translateY(16px)', transition: 'all 0.9s ease 0.2s' }}>SONORAN STYLE · MESQUITE GRILLED · SINCE 2019</div>
@@ -240,6 +242,15 @@ export default function App() {
               Our Mill Ave location features a self-pour beer wall with 20 taps — including draft margaritas with 3 Amigos Tequila — plus a full cocktail menu.
             </p>
           </Reveal>
+          <Reveal delay={120}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 8, marginBottom: 32 }}>
+              {IMG.beerWall.slice(0, 3).map((src, i) => (
+                <div key={i} style={{ borderRadius: 10, overflow: 'hidden', height: 180, background: '#151515' }}>
+                  <img src={src} alt="Taco Boy's Bar" style={{ width: '100%', height: '100%', objectFit: 'cover' }} loading="lazy" />
+                </div>
+              ))}
+            </div>
+          </Reveal>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: 12 }}>
             {MILL_AVE_COCKTAILS.map((c, i) => (
               <Reveal key={c.name} delay={150 + i * 80}>
@@ -313,7 +324,9 @@ export default function App() {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: 16 }}>
             {LOCATIONS.map((l, i) => (
               <Reveal key={l.id} delay={100 + i * 80}>
-                <div style={{ background: '#151515', border: '1px solid #2a2a2a', borderRadius: 14, padding: 22, textAlign: 'left' }}>
+                <div style={{ background: '#151515', border: '1px solid #2a2a2a', borderRadius: 14, overflow: 'hidden', textAlign: 'left' }}>
+                  {i === 0 && <div style={{ height: 120, overflow: 'hidden' }}><img src={IMG.storefront} alt={l.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} loading="lazy" /></div>}
+                  <div style={{ padding: 22 }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 8 }}>
                     <div style={{ fontFamily: "'Bebas Neue'", fontSize: 22, color: '#F5F0E8', letterSpacing: '0.05em' }}>{l.name}</div>
                     {l.flag && <span style={{ fontSize: 8, fontWeight: 700, letterSpacing: '0.1em', padding: '3px 8px', borderRadius: 100, background: 'rgba(212,43,32,0.1)', color: '#D42B20', whiteSpace: 'nowrap' }}>{l.flag}</span>}
@@ -322,10 +335,32 @@ export default function App() {
                   <div style={{ fontFamily: "'JetBrains Mono'", fontSize: 10, color: '#5a5450', marginBottom: 6 }}>{l.hours}</div>
                   <a href={`tel:${l.phone.replace(/[^0-9]/g, '')}`} style={{ fontSize: 13, color: '#D42B20', fontWeight: 600, marginBottom: 14, display: 'block' }}>{l.phone}</a>
                   <a href={mapsUrl(l.addr)} target="_blank" rel="noopener noreferrer" style={{ display: 'block', width: '100%', padding: '10px 20px', borderRadius: 100, background: 'transparent', border: '1px solid #2a2a2a', color: '#8a8078', fontSize: 12, fontWeight: 600, textAlign: 'center' }}>Get Directions →</a>
+                  </div>
                 </div>
               </Reveal>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ═══ GALLERY ═══ */}
+      <section style={{ padding: '100px 24px' }}>
+        <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+          <Reveal><div style={tag}>THE VIBE</div><h2 style={h2}>Mesquite Smoke. <span style={{ color: '#D42B20' }}>Good Times.</span></h2></Reveal>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gap: 8, marginTop: 32 }}>
+            {[...IMG.gallery.slice(0, 4), ...IMG.food.slice(0, 2), ...IMG.interior.slice(0, 2)].map((src, i) => (
+              <Reveal key={i} delay={i * 60}>
+                <div style={{ borderRadius: 10, overflow: 'hidden', aspectRatio: i % 3 === 0 ? '4/5' : '1/1', background: '#151515' }}>
+                  <img src={src} alt="Taco Boy's" style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.6s ease' }} loading="lazy" />
+                </div>
+              </Reveal>
+            ))}
+          </div>
+          <Reveal delay={300}>
+            <div style={{ textAlign: 'center', marginTop: 24 }}>
+              <a href="https://instagram.com/aztacoboys" target="_blank" rel="noopener" style={{ fontSize: 14, color: '#D42B20', fontWeight: 600 }}>See more on Instagram → @aztacoboys</a>
+            </div>
+          </Reveal>
         </div>
       </section>
 
@@ -361,7 +396,7 @@ export default function App() {
 
       {/* ═══ FOOTER ═══ */}
       <footer style={{ padding: '48px 24px 32px', textAlign: 'center', borderTop: '1px solid #2a2a2a' }}>
-        <div style={{ fontFamily: "'Bebas Neue'", fontSize: 24, letterSpacing: '0.1em', color: '#F5F0E8', marginBottom: 4 }}>TACO BOY'S</div>
+        <img src={IMG.logo} alt="Taco Boy's" style={{ height: 48, objectFit: 'contain', margin: '0 auto 12px', opacity: 0.7 }} />
         <div style={{ fontFamily: "'JetBrains Mono'", fontSize: 9, letterSpacing: '0.2em', color: '#5a5450', marginBottom: 20 }}>SONORAN STYLE SINCE 2019</div>
         <div style={{ display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap', marginBottom: 16, fontSize: 13, color: '#8a8078' }}>
           <a href="#menu">Menu</a><a href="#catering">Catering</a><a href="#locations">Locations</a>
@@ -472,7 +507,9 @@ function Nav({ cartCount, onCartClick, mobileNav, setMobileNav }) {
   return (
     <>
       <nav style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 200, height: 64, display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 24px', background: scrolled ? 'rgba(10,10,10,0.92)' : 'transparent', backdropFilter: scrolled ? 'blur(20px)' : 'none', borderBottom: scrolled ? '1px solid #2a2a2a' : '1px solid transparent', transition: 'all 0.4s ease' }}>
-        <a href="#" style={{ fontFamily: "'Bebas Neue'", fontSize: 22, letterSpacing: '0.08em' }}>TACO <span style={{ color: '#D42B20' }}>BOY'S</span></a>
+        <a href="#" style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+          <img src={IMG.logo} alt="Taco Boy's" style={{ height: 36, objectFit: 'contain' }} />
+        </a>
         <div style={{ display: 'flex', gap: 24, alignItems: 'center' }} className="nav-desktop">
           {['Menu', 'Catering', 'Locations'].map(l => <a key={l} href={`#${l.toLowerCase()}`} style={{ fontSize: 12, fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#8a8078' }}>{l}</a>)}
           <button onClick={onCartClick} style={{ padding: '8px 16px', borderRadius: 100, background: '#D42B20', color: '#fff', fontSize: 12, fontWeight: 700, letterSpacing: '0.05em', display: 'flex', alignItems: 'center', gap: 6, border: 'none' }}>🌮 {cartCount > 0 ? cartCount : 'Order'}</button>
@@ -496,7 +533,9 @@ const tag = { fontFamily: "'JetBrains Mono'", fontSize: 10, letterSpacing: '0.25
 const h2 = { fontFamily: "'Bebas Neue'", fontSize: 'clamp(32px, 5vw, 52px)', letterSpacing: '0.04em', lineHeight: 1.1, color: '#F5F0E8', textAlign: 'center', marginBottom: 16 }
 
 const hero = {
-  wrap: { position: 'relative', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', background: 'linear-gradient(180deg, #0a0a0a 0%, #1a0a08 40%, #2a0f0a 60%, #0a0a0a 100%)' },
+  wrap: { position: 'relative', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', background: '#0a0a0a' },
+  bgImg: { position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0 },
+  darkOverlay: { position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(10,10,10,0.6) 0%, rgba(10,10,10,0.75) 50%, rgba(10,10,10,0.95) 100%)', zIndex: 1 },
   fireOverlay: { position: 'absolute', bottom: 0, left: 0, right: 0, height: '40%', background: 'radial-gradient(ellipse at center bottom, rgba(212,43,32,0.15) 0%, transparent 70%)', pointerEvents: 'none', animation: 'firePulse 4s ease-in-out infinite', zIndex: 1 },
   smokeOverlay: { position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at 50% 30%, rgba(245,166,35,0.04) 0%, transparent 60%)', pointerEvents: 'none', zIndex: 1 },
   content: { position: 'relative', zIndex: 2, textAlign: 'center', padding: '0 24px' },

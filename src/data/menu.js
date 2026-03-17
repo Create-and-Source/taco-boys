@@ -1,3 +1,46 @@
+// ── Images ──
+const CDN = 'https://assets.cdn.filesafe.space/aoYizwC8bJwUBPdQmsg5/media/'
+const PHXRAIL = 'https://phxrailfood.com/wp-content/uploads/'
+const IPOURIT = 'https://ipouritinc.com/wp-content/uploads/2022/02/'
+
+export const IMG = {
+  logo: CDN + '66840e345f04f20a354f5f55.png',
+  hero: CDN + '668410a44918dc88e5f443e4.jpeg',
+  storefront: 'https://vivaphoenix.com/wp-content/uploads/2021/06/313c3a3cbb77827978989df2e8ad381f_-united-states-arizona-maricopa-county-phoenix-evans-churchill-east-roosevelt-street-620-taco-boys-602-675-3962.jpg',
+  gallery: [
+    CDN + '6685565e5a85131f4cf3c6f1.jpeg',
+    CDN + '668416281d120c7d05d0b357.jpeg',
+    CDN + '66855551222ca0d6f9590b3d.jpeg',
+    CDN + '668555867376714dc733ebe8.jpeg',
+    CDN + '66855586ea0cced3ac1ebe4a.jpeg',
+    CDN + '668555db5a85131f74f3c67d.jpeg',
+    CDN + '668555dbea0ccefcc11ebe7b.jpeg',
+    CDN + '668555dbea0cce96051ebe7a.jpeg',
+  ],
+  food: [
+    PHXRAIL + '2024/01/7f1f8d22-504d-43f2-8251-f649cd34ddbb_1_105_c.jpeg',
+    PHXRAIL + '2023/12/671faaeb-0f82-4a22-81ef-85319c8dc510_1_102_a.jpeg',
+    PHXRAIL + '2023/12/55bb09a0-daed-4491-b520-eb4387f90349_1_105_c.jpeg',
+    PHXRAIL + '2023/12/67dffba3-cbd5-4aba-b9f8-b378f5440e4c_1_105_c.jpeg',
+    PHXRAIL + '2023/12/9f16c4e1-ac4f-41e7-ad75-6859e6b9b29d_1_105_c.jpeg',
+    PHXRAIL + '2023/12/7420d668-0a05-4c63-a501-6123259854fc_1_201_a.jpeg',
+    PHXRAIL + '2023/12/fd2f5ec8-d581-4fd5-a775-224d6a90ac3a_1_105_c.jpeg',
+  ],
+  interior: [
+    CDN + '6684190a33f4aa41c46ee6ab.jpeg',
+    CDN + '6684190ab8d71053a06f8177.jpeg',
+    CDN + '6684190ab5df664f3bb8f96a.jpeg',
+    CDN + '6684190a2e1a026a9faf4123.jpeg',
+  ],
+  beerWall: [
+    IPOURIT + 'TacoBoys1.jpg',
+    IPOURIT + 'TacoBoys2.jpg',
+    IPOURIT + 'TacoBoys4.jpg',
+    IPOURIT + 'TacoBoys5.jpg',
+  ],
+  badge: CDN + '66855e51ea0cce19251ec4ac.png',
+}
+
 export const MENU = [
   {
     category: 'Tacos',
