@@ -3,6 +3,7 @@ import { MENU, LOCATIONS, SPECIALS, MILL_AVE_COCKTAILS, PRESS, IMG, mapsUrl } fr
 import { getCart, saveCart, addOrder, addCateringRequest } from './data/store'
 import Admin from './pages/Admin'
 import MemberPortal from './pages/MemberPortal'
+import SignIn from './pages/SignIn'
 
 /* ── Reveal ── */
 function Reveal({ children, delay = 0, style = {} }) {
@@ -13,7 +14,13 @@ function Reveal({ children, delay = 0, style = {} }) {
 }
 
 export default function App() {
-  const [page, setPage] = useState(window.location.hash === '#admin' ? 'admin' : window.location.hash === '#rewards' ? 'rewards' : 'store')
+  const [page, setPage] = useState(() => {
+    const h = window.location.hash
+    if (h === '#admin') return 'admin'
+    if (h === '#rewards') return 'rewards'
+    if (h === '#signin') return 'signin'
+    return 'store'
+  })
   const [heroVis, setHeroVis] = useState(false)
   const [activeCategory, setActiveCategory] = useState('Tacos')
   const [cart, setCart] = useState(getCart)
@@ -28,7 +35,17 @@ export default function App() {
 
   useEffect(() => { setTimeout(() => setHeroVis(true), 200) }, [])
   useEffect(() => { saveCart(cart) }, [cart])
-  useEffect(() => { const fn = () => setPage(window.location.hash === '#admin' ? 'admin' : window.location.hash === '#rewards' ? 'rewards' : 'store'); window.addEventListener('hashchange', fn); return () => window.removeEventListener('hashchange', fn) }, [])
+  useEffect(() => {
+    const fn = () => {
+      const h = window.location.hash
+      if (h === '#admin') setPage('admin')
+      else if (h === '#rewards') setPage('rewards')
+      else if (h === '#signin') setPage('signin')
+      else setPage('store')
+    }
+    window.addEventListener('hashchange', fn)
+    return () => window.removeEventListener('hashchange', fn)
+  }, [])
 
   const doAddToCart = useCallback((item) => {
     setCart(prev => { const ex = prev.find(c => c.id === item.id); if (ex) return prev.map(c => c.id === item.id ? { ...c, qty: c.qty + 1 } : c); return [...prev, { ...item, qty: 1 }] })
@@ -40,6 +57,11 @@ export default function App() {
   const cartTotal = cart.reduce((s, c) => s + c.price * c.qty, 0)
   const handleCheckout = (form) => { const order = addOrder({ name: form.name, phone: form.phone, email: form.email, items: cart.map(c => ({ name: c.name, qty: c.qty, price: c.price })), total: cartTotal, type: orderType, location: LOCATIONS[pickupLocation].name, notes: form.notes }); setOrderConfirm(order); clearCart(); setCheckoutOpen(false) }
 
+  if (page === 'signin') return <SignIn onSignIn={(role) => {
+    if (role === 'admin') { window.location.hash = 'admin'; setPage('admin') }
+    else if (role === 'customer') { window.location.hash = 'rewards'; setPage('rewards') }
+    else { window.location.hash = ''; setPage('store') }
+  }} />
   if (page === 'admin') return <Admin onBack={() => { window.location.hash = ''; setPage('store') }} />
   if (page === 'rewards') return <MemberPortal onBack={() => { window.location.hash = ''; setPage('store') }} />
 
@@ -418,7 +440,7 @@ export default function App() {
         <img src={IMG.logo} alt="Taco Boy's" style={{ height: 50, margin: '0 auto 12px' }} />
         <div style={{ fontFamily: V.font_mono, fontSize: 9, letterSpacing: '0.2em', color: '#999', marginBottom: 16 }}>SONORAN STYLE SINCE 2019</div>
         <div style={{ display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap', marginBottom: 16 }}>
-          {[['Menu', '#menu'], ['Catering', '#catering'], ['Locations', '#locations'], ['My Rewards', '#rewards'], ['Instagram', 'https://instagram.com/aztacoboys']].map(([l, h]) => (
+          {[['Menu', '#menu'], ['Catering', '#catering'], ['Locations', '#locations'], ['Sign In', '#signin'], ['Instagram', 'https://instagram.com/aztacoboys']].map(([l, h]) => (
             <a key={l} href={h} target={h.startsWith('http') ? '_blank' : undefined} rel={h.startsWith('http') ? 'noopener' : undefined} style={{ fontFamily: V.font_display, fontSize: 16, color: '#000' }}>{l.toUpperCase()}</a>
           ))}
           <a href="#admin" style={{ fontFamily: V.font_display, fontSize: 16, color: '#ccc' }}>ADMIN</a>
@@ -538,7 +560,7 @@ function Nav({ cartCount, onCartClick, mobileNav, setMobileNav }) {
         </a>
         <div style={{ display: 'flex', gap: 20, alignItems: 'center' }} className="nav-desktop">
           {['Menu', 'Catering', 'Locations'].map(l => <a key={l} href={`#${l.toLowerCase()}`} style={{ fontFamily: V.font_display, fontSize: 18, color: scrolled ? '#000' : '#fff' }}>{l.toUpperCase()}</a>)}
-          <a href="#rewards" style={{ fontFamily: V.font_display, fontSize: 18, color: '#F5A623' }}>MY REWARDS</a>
+          <a href="#signin" style={{ fontFamily: V.font_display, fontSize: 18, color: '#F5A623' }}>SIGN IN</a>
           <button onClick={onCartClick} style={{ padding: '8px 20px', background: '#e93d3d', color: '#fff', fontFamily: V.font_display, fontSize: 16, fontWeight: 700, border: 'none', display: 'flex', alignItems: 'center', gap: 6 }}>🌮 {cartCount > 0 ? cartCount : 'ORDER'}</button>
         </div>
         <div className="nav-mobile" style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
@@ -548,6 +570,7 @@ function Nav({ cartCount, onCartClick, mobileNav, setMobileNav }) {
       </nav>
       {mobileNav && <div style={{ position: 'fixed', top: 64, left: 0, right: 0, bottom: 0, zIndex: 199, background: '#fff', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 24 }}>
         {['Menu', 'Catering', 'Locations'].map(l => <a key={l} href={`#${l.toLowerCase()}`} onClick={() => setMobileNav(false)} style={{ fontFamily: V.font_display, fontSize: 36, color: '#000' }}>{l.toUpperCase()}</a>)}
+        <a href="#signin" onClick={() => setMobileNav(false)} style={{ fontFamily: V.font_display, fontSize: 28, color: '#F5A623' }}>SIGN IN / REWARDS</a>
         <a href="https://instagram.com/aztacoboys" target="_blank" rel="noopener" style={{ fontFamily: V.font_display, fontSize: 20, color: '#e93d3d' }}>@AZTACOBOYS</a>
       </div>}
     </>
