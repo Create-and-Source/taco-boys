@@ -13,27 +13,27 @@ export default function SignIn({ onSignIn }) {
       <Wrap>
         <Box>
           <img src={IMG.logo} alt="Taco Boy's" style={{ height: 60, margin: '0 auto 20px' }} />
-          <div style={{ fontFamily: V.font_display, fontSize: 32, textAlign: 'center', color: 'var(--text)', marginBottom: 4 }}>WELCOME TO TACO BOY'S</div>
-          <div style={{ fontSize: 14, color: 'var(--text2)', textAlign: 'center', marginBottom: 32 }}>Sign in to order, earn rewards, and track your tacos.</div>
+          <div style={{ fontFamily: V.font_display, fontSize: 32, textAlign: 'center', color: '#1a1a1a', marginBottom: 4 }}>WELCOME TO TACO BOY'S</div>
+          <div style={{ fontSize: 14, color: '#666', textAlign: 'center', marginBottom: 32 }}>Sign in to order, earn rewards, and track your tacos.</div>
 
           <Btn onClick={() => onSignIn('customer')}>SIGN IN</Btn>
           <BtnOutline onClick={() => setMode('signup')}>CREATE ACCOUNT</BtnOutline>
 
           <div style={{ textAlign: 'center', margin: '24px 0 16px' }}>
-            <div style={{ fontSize: 12, color: 'var(--muted)', marginBottom: 12 }}>— or —</div>
+            <div style={{ fontSize: 12, color: '#999', marginBottom: 12 }}>— or —</div>
             <BtnGhost onClick={() => onSignIn('guest')}>CONTINUE AS GUEST</BtnGhost>
           </div>
 
           <div style={{ height: 1, background: 'var(--border)', margin: '16px 0' }} />
 
-          <div style={{ display: 'flex', gap: 0, border: '1px solid var(--border)', borderRadius: 'var(--r)', overflow: 'hidden', marginTop: 8 }}>
+          <div style={{ display: 'flex', gap: 0, border: '1px solid #e5e5e5', borderRadius: 'var(--r)', overflow: 'hidden', marginTop: 8 }}>
             {[
               { id: 'owner', label: 'OWNER', icon: '👑' },
               { id: 'manager', label: 'MANAGER', icon: '📋' },
               { id: 'staff', label: 'STAFF', icon: '🌮' },
             ].map((role, i) => (
               <button key={role.id} onClick={() => onSignIn('admin')} style={{
-                flex: 1, padding: '14px 8px', background: 'var(--surface2)', color: 'var(--text)',
+                flex: 1, padding: '14px 8px', background: '#f5f5f2', color: '#1a1a1a',
                 fontFamily: V.font_display, fontSize: 13, borderRight: i < 2 ? '1px solid var(--border)' : 'none',
                 textAlign: 'center',
               }}>
@@ -42,7 +42,7 @@ export default function SignIn({ onSignIn }) {
               </button>
             ))}
           </div>
-          <div style={{ textAlign: 'center', fontSize: 11, color: 'var(--muted)', marginTop: 8 }}>Staff / Admin Access</div>
+          <div style={{ textAlign: 'center', fontSize: 11, color: '#999', marginTop: 8 }}>Staff / Admin Access</div>
         </Box>
       </Wrap>
     )
@@ -52,9 +52,9 @@ export default function SignIn({ onSignIn }) {
     return (
       <Wrap>
         <Box>
-          <button onClick={() => setMode('choose')} style={{ fontFamily: V.font_display, fontSize: 14, color: 'var(--muted)', marginBottom: 16 }}>← BACK</button>
-          <div style={{ fontFamily: V.font_display, fontSize: 28, textAlign: 'center', color: 'var(--text)', marginBottom: 4 }}>CREATE ACCOUNT</div>
-          <div style={{ fontSize: 14, color: 'var(--text2)', textAlign: 'center', marginBottom: 24 }}>Join Taco Boy's Rewards. Earn points on every order.</div>
+          <button onClick={() => setMode('choose')} style={{ fontFamily: V.font_display, fontSize: 14, color: '#999', marginBottom: 16 }}>← BACK</button>
+          <div style={{ fontFamily: V.font_display, fontSize: 28, textAlign: 'center', color: '#1a1a1a', marginBottom: 4 }}>CREATE ACCOUNT</div>
+          <div style={{ fontSize: 14, color: '#666', textAlign: 'center', marginBottom: 24 }}>Join Taco Boy's Rewards. Earn points on every order.</div>
 
           <Field label="YOUR NAME" value={form.name} onChange={v => u('name', v)} placeholder="Marcus T." />
           <Field label="PHONE NUMBER" value={form.phone} onChange={v => u('phone', v)} placeholder="(480) 555-0142" type="tel" />
@@ -64,8 +64,8 @@ export default function SignIn({ onSignIn }) {
 
           {/* Perks */}
           <div style={{ border: '1px solid var(--red)', borderRadius: 'var(--r)', overflow: 'hidden', marginTop: 24 }}>
-            <div style={{ background: 'var(--red)', color: '#fff', padding: '10px 16px', fontFamily: V.font_display, fontSize: 16 }}>WHAT YOU GET</div>
-            <div style={{ padding: 16, background: 'var(--surface2)' }}>
+            <div style={{ background: '#D43D2F', color: '#fff', padding: '10px 16px', fontFamily: V.font_display, fontSize: 16 }}>WHAT YOU GET</div>
+            <div style={{ padding: 16, background: '#f5f5f2' }}>
               {[
                 '🌮 Earn 1 point per dollar spent',
                 '🎁 Redeem for free tacos, drinks, and platos',
@@ -73,14 +73,14 @@ export default function SignIn({ onSignIn }) {
                 '🔥 Exclusive promos and early access to specials',
                 '🏆 Level up to VIP for bonus rewards',
               ].map(perk => (
-                <div key={perk} style={{ fontSize: 13, padding: '5px 0', color: 'var(--text2)' }}>{perk}</div>
+                <div key={perk} style={{ fontSize: 13, padding: '5px 0', color: '#666' }}>{perk}</div>
               ))}
             </div>
           </div>
 
           <div style={{ textAlign: 'center', marginTop: 16 }}>
-            <span style={{ fontSize: 13, color: 'var(--muted)' }}>Already have an account? </span>
-            <button onClick={() => onSignIn('customer')} style={{ fontSize: 13, color: 'var(--red)', fontWeight: 700, fontFamily: V.font_display }}>SIGN IN</button>
+            <span style={{ fontSize: 13, color: '#999' }}>Already have an account? </span>
+            <button onClick={() => onSignIn('customer')} style={{ fontSize: 13, color: '#D43D2F', fontWeight: 700, fontFamily: V.font_display }}>SIGN IN</button>
           </div>
         </Box>
       </Wrap>
@@ -91,30 +91,30 @@ export default function SignIn({ onSignIn }) {
 }
 
 function Wrap({ children }) {
-  return <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24, background: 'var(--bg)' }}>{children}</div>
+  return <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24, background: '#f5f5f2' }}>{children}</div>
 }
 
 function Box({ children }) {
-  return <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 'var(--r)', padding: 32, width: '100%', maxWidth: 420 }}>{children}</div>
+  return <div style={{ background: '#fff', border: '1px solid #e5e5e5', borderRadius: 'var(--r)', padding: 32, width: '100%', maxWidth: 420 }}>{children}</div>
 }
 
 function Btn({ children, onClick, style = {} }) {
-  return <button onClick={onClick} style={{ width: '100%', padding: '16px 20px', background: 'var(--red)', color: '#fff', fontFamily: "'Squada One', cursive", fontSize: 20, fontWeight: 700, border: 'none', cursor: 'pointer', borderRadius: 'var(--r)', ...style }}>{children}</button>
+  return <button onClick={onClick} style={{ width: '100%', padding: '16px 20px', background: '#D43D2F', color: '#fff', fontFamily: "'Squada One', cursive", fontSize: 20, fontWeight: 700, border: 'none', cursor: 'pointer', borderRadius: 'var(--r)', ...style }}>{children}</button>
 }
 
 function BtnOutline({ children, onClick }) {
-  return <button onClick={onClick} style={{ width: '100%', padding: '16px 20px', background: 'transparent', color: 'var(--text)', fontFamily: "'Squada One', cursive", fontSize: 20, fontWeight: 700, border: '1px solid var(--border)', cursor: 'pointer', borderRadius: 'var(--r)', marginTop: 8 }}>{children}</button>
+  return <button onClick={onClick} style={{ width: '100%', padding: '16px 20px', background: 'transparent', color: '#1a1a1a', fontFamily: "'Squada One', cursive", fontSize: 20, fontWeight: 700, border: '1px solid #e5e5e5', cursor: 'pointer', borderRadius: 'var(--r)', marginTop: 8 }}>{children}</button>
 }
 
 function BtnGhost({ children, onClick }) {
-  return <button onClick={onClick} style={{ width: '100%', padding: '12px 20px', background: 'transparent', color: 'var(--muted)', fontFamily: "'Squada One', cursive", fontSize: 16, fontWeight: 700, border: '1px solid var(--border)', cursor: 'pointer', borderRadius: 'var(--r)' }}>{children}</button>
+  return <button onClick={onClick} style={{ width: '100%', padding: '12px 20px', background: 'transparent', color: '#999', fontFamily: "'Squada One', cursive", fontSize: 16, fontWeight: 700, border: '1px solid #e5e5e5', cursor: 'pointer', borderRadius: 'var(--r)' }}>{children}</button>
 }
 
 function Field({ label, value, onChange, placeholder, type = 'text' }) {
   return (
     <div style={{ marginBottom: 14 }}>
-      <label style={{ fontFamily: "'Squada One', cursive", fontSize: 12, color: 'var(--muted)', display: 'block', marginBottom: 4 }}>{label}</label>
-      <input type={type} value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder} style={{ width: '100%', padding: '14px 16px', border: '1px solid var(--border)', background: 'var(--surface2)', color: 'var(--text)', fontSize: 15, fontFamily: "'Albert Sans', sans-serif", borderRadius: 'var(--r)' }} />
+      <label style={{ fontFamily: "'Squada One', cursive", fontSize: 12, color: '#999', display: 'block', marginBottom: 4 }}>{label}</label>
+      <input type={type} value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder} style={{ width: '100%', padding: '14px 16px', border: '1px solid #e5e5e5', background: '#f5f5f2', color: '#1a1a1a', fontSize: 15, fontFamily: "'Albert Sans', sans-serif", borderRadius: 'var(--r)' }} />
     </div>
   )
 }
