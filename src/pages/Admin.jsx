@@ -58,7 +58,7 @@ export default function Admin({ onBack }) {
               <span style={{ fontSize: 16, flexShrink: 0, width: 24, textAlign: 'center' }}>{item.icon}</span>
               {sidebarOpen && <span>{item.label}</span>}
               {sidebarOpen && item.badge && activeOrders.length > 0 && (
-                <span style={{ marginLeft: 'auto', background: '#D43D2F', color: '#1a1a1a', fontSize: 10, fontWeight: 700, padding: '1px 6px', borderRadius: 100 }}>{activeOrders.length}</span>
+                <span style={{ marginLeft: 'auto', background: '#D43D2F', color: '#fff', fontSize: 10, fontWeight: 700, padding: '1px 6px', borderRadius: 100 }}>{activeOrders.length}</span>
               )}
             </button>
           ))}
@@ -164,7 +164,7 @@ function OrderCard({ order: o, onStatus, borderRight }) {
     <div style={{ padding: 16, borderRight: borderRight ? B : 'none', background: '#fff' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 6 }}>
         <span style={{ fontFamily: V.font_mono, fontSize: 13, fontWeight: 600 }}>{o.id}</span>
-        <span style={{ fontSize: 10, fontWeight: 700, padding: '2px 8px', background: statusColors[o.status], color: '#1a1a1a' }}>{o.status.toUpperCase()}</span>
+        <span style={{ fontSize: 10, fontWeight: 700, padding: '2px 8px', background: statusColors[o.status], color: '#fff' }}>{o.status.toUpperCase()}</span>
       </div>
       <div style={{ fontWeight: 700, fontSize: 15, marginBottom: 2 }}>{o.name}</div>
       <div style={{ fontSize: 12, color: '#999', marginBottom: 8 }}>{o.type} · {o.location} · {timeAgo(o.createdAt)}</div>
@@ -173,7 +173,7 @@ function OrderCard({ order: o, onStatus, borderRight }) {
       ))}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 10 }}>
         <span style={{ fontFamily: V.font_display, fontSize: 22, color: '#D43D2F' }}>${o.total?.toFixed(2)}</span>
-        {next[o.status] && <button onClick={() => onStatus(o.id, next[o.status])} style={{ padding: '6px 14px', background: '#D43D2F', color: '#1a1a1a', fontFamily: V.font_display, fontSize: 12, border: 'none', cursor: 'pointer' }}>→ {next[o.status].toUpperCase()}</button>}
+        {next[o.status] && <button onClick={() => onStatus(o.id, next[o.status])} style={{ padding: '6px 14px', background: '#D43D2F', color: '#fff', fontFamily: V.font_display, fontSize: 12, border: 'none', cursor: 'pointer', borderRadius: 8 }}>→ {next[o.status].toUpperCase()}</button>}
       </div>
     </div>
   )
@@ -188,7 +188,7 @@ function OrdersTab({ orders, onStatus }) {
       <SectionTitle>ORDERS</SectionTitle>
       <div style={{ display: 'flex', gap: 0, border: B, marginBottom: 16 }}>
         {['All', 'New', 'Preparing', 'Ready', 'Picked Up', 'Delivered'].map(f => (
-          <button key={f} onClick={() => setFilter(f)} style={{ padding: '10px 16px', fontFamily: V.font_display, fontSize: 14, background: filter === f ? '#D43D2F' : '#1a1a1a', color: filter === f ? '#1a1a1a' : '#1a1a1a', borderRight: B, flex: 1 }}>{f.toUpperCase()}</button>
+          <button key={f} onClick={() => setFilter(f)} style={{ padding: '10px 16px', fontFamily: V.font_display, fontSize: 14, background: filter === f ? '#D43D2F' : '#fff', color: filter === f ? '#fff' : '#1a1a1a', borderRight: '1px solid #e5e5e5', flex: 1 }}>{f.toUpperCase()}</button>
         ))}
       </div>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 0, border: B }}>
@@ -303,7 +303,7 @@ function CateringTab({ requests }) {
           <div key={r.id} style={{ padding: 16, borderBottom: i < requests.length - 1 ? B : 'none' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 6 }}>
               <span style={{ fontWeight: 700, fontSize: 15 }}>{r.name}</span>
-              <span style={{ fontSize: 10, fontWeight: 700, padding: '2px 8px', background: r.status === 'Confirmed' ? '#37ca37' : '#D43D2F', color: '#1a1a1a' }}>{r.status.toUpperCase()}</span>
+              <span style={{ fontSize: 10, fontWeight: 700, padding: '2px 8px', background: r.status === 'Confirmed' ? '#37ca37' : '#D43D2F', color: '#fff', borderRadius: 4 }}>{r.status.toUpperCase()}</span>
             </div>
             <div style={{ fontSize: 13, color: '#666' }}>📅 {r.date} · 👥 {r.guests} guests · 📞 {r.phone}</div>
             {r.details && <div style={{ fontSize: 13, color: '#999', fontStyle: 'italic', marginTop: 4 }}>{r.details}</div>}
@@ -326,7 +326,7 @@ function LocationsTab() {
             <div style={{ fontSize: 13, color: '#666', marginBottom: 2 }}>{l.addr}</div>
             <div style={{ fontFamily: V.font_mono, fontSize: 10, color: '#999', marginBottom: 2 }}>{l.hours}</div>
             <div style={{ fontSize: 13, color: '#D43D2F', fontWeight: 600 }}>{l.phone}</div>
-            {l.flag && <div style={{ marginTop: 6, display: 'inline-block', padding: '2px 8px', background: '#D43D2F', color: '#1a1a1a', fontSize: 10, fontWeight: 700 }}>{l.flag}</div>}
+            {l.flag && <div style={{ marginTop: 6, display: 'inline-block', padding: '2px 8px', background: '#D43D2F', color: '#fff', fontSize: 10, fontWeight: 700, borderRadius: 4 }}>{l.flag}</div>}
           </div>
         ))}
       </div>
