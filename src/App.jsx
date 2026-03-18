@@ -76,21 +76,21 @@ export default function App() {
           <span style={S.heading}>YOUR ORDER</span>
           <button onClick={() => setCartOpen(false)} style={{ fontSize: 20 }}>✕</button>
         </div>
-        <div style={{ display: 'flex', gap: 12, borderBottom: B }}>
+        <div style={{ display: 'flex', gap: 12 }}>
           {['pickup', 'delivery'].map(t => (
             <button key={t} onClick={() => setOrderType(t)} style={{ flex: 1, padding: '12px 0', fontSize: 14, fontFamily: V.font_display, fontWeight: 700, background: orderType === t ? 'var(--red)' : 'var(--surface)', color: orderType === t ? '#fff' : 'var(--text)', borderRadius: 'var(--r)' }}>
               {t === 'pickup' ? 'PICKUP' : 'DELIVERY'}
             </button>
           ))}
         </div>
-        <div style={{ padding: '12px 16px', borderBottom: B }}>
+        <div style={{ padding: '12px 16px' }}>
           <select value={pickupLocation} onChange={e => setPickupLocation(+e.target.value)} style={{ width: '100%', padding: '10px', border: B, background: 'var(--bg2)', fontSize: 13, fontFamily: V.font_body }}>
             {LOCATIONS.map((l, i) => <option key={l.id} value={i}>{l.name}</option>)}
           </select>
         </div>
         <div style={{ flex: 1, overflowY: 'auto' }}>
           {cart.length === 0 ? <div style={{ padding: 40, textAlign: 'center', color: 'var(--muted)' }}>Your cart is empty</div> : cart.map(item => (
-            <div key={item.id} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '12px 16px', borderBottom: B }}>
+            <div key={item.id} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '12px 16px' }}>
               <div style={{ flex: 1 }}>
                 <div style={{ fontWeight: 700, fontSize: 14 }}>{item.name}</div>
                 <div style={{ fontSize: 12, color: 'var(--text2)' }}>${item.price} each</div>
@@ -136,40 +136,23 @@ export default function App() {
             <a href="#menu" style={{ ...S.btn, display: 'inline-block', width: 'auto', padding: '16px 40px' }}>ORDER NOW</a>
             <a href="#menu" style={{ display: 'inline-block', padding: '16px 40px', border: 'none', color: '#fff', fontFamily: V.font_display, fontSize: 20, fontWeight: 700 }}>SEE THE MENU</a>
           </div>
-        </div>
-      </section>
-
-      {/* ═══ PRESS BAR ═══ */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 32, padding: '14px 24px', background: 'var(--bg)', borderBottom: '1px solid var(--border)', flexWrap: 'wrap' }}>
-        <span style={{ fontFamily: V.font_mono, fontSize: 9, letterSpacing: '0.2em', color: 'var(--text2)' }}>AS SEEN ON</span>
-        {PRESS.map(p => <span key={p.name} style={{ fontFamily: V.font_display, fontSize: 18, color: 'var(--muted)' }}>{p.name.toUpperCase()}</span>)}
-      </div>
-
-      {/* ═══ MARQUEE ═══ */}
-      <div style={{ overflow: 'hidden', borderBottom: B, padding: '12px 0', background: 'var(--surface)' }}>
-        <div style={{ display: 'flex', width: 'max-content', animation: 'marquee 20s linear infinite' }}>
-          {[...Array(2)].map((_, ri) => (
-            <div key={ri} style={{ display: 'flex', alignItems: 'center', gap: 20, paddingRight: 20 }}>
-              {['CARNE ASADA', '🔥', 'AL PASTOR', '🔥', 'VAMPIROS', '🔥', 'BARBACOA', '🔥', 'BURRITOS', '🔥', 'FAMILY PACKS', '🔥', 'CARNITAS', '🔥'].map((t, i) => (
-                <span key={i} style={t === '🔥' ? { fontSize: 14 } : { fontFamily: V.font_display, fontSize: 20, color: 'var(--red)', whiteSpace: 'nowrap' }}>{t}</span>
-              ))}
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* ═══ STATS BAR ═══ */}
-      <section style={{ display: 'flex', borderBottom: B, flexWrap: 'wrap' }}>
-        {[{ val: '6', l: 'LOCATIONS' }, { val: '94K', l: 'FOLLOWERS' }, { val: '2019', l: 'FOUNDED' }, { val: '1K+', l: 'YELP REVIEWS' }].map((s2, i) => (
-          <div key={s2.l} style={{ flex: '1 1 25%', minWidth: 150, padding: '24px 20px', textAlign: 'center', border: B, borderRadius: 'var(--r)' }}>
-            <div style={{ fontFamily: V.font_display, fontSize: 36, color: 'var(--red)' }}>{s2.val}</div>
-            <div style={{ fontFamily: V.font_mono, fontSize: 10, letterSpacing: '0.15em', color: 'var(--muted)' }}>{s2.l}</div>
+          {/* Stats in hero */}
+          <div style={{ display: 'flex', gap: 24, justifyContent: 'center', flexWrap: 'wrap', marginTop: 48 }}>
+            {[{ val: '6', l: 'LOCATIONS' }, { val: '94K', l: 'FOLLOWERS' }, { val: '1K+', l: 'REVIEWS' }].map(s2 => (
+              <div key={s2.l} style={{ textAlign: 'center' }}>
+                <div style={{ fontFamily: V.font_display, fontSize: 28, color: '#fff' }}>{s2.val}</div>
+                <div style={{ fontFamily: V.font_mono, fontSize: 9, letterSpacing: '0.15em', color: 'rgba(255,255,255,0.4)' }}>{s2.l}</div>
+              </div>
+            ))}
           </div>
-        ))}
+          <div style={{ display: 'flex', gap: 20, justifyContent: 'center', flexWrap: 'wrap', marginTop: 20 }}>
+            {PRESS.map(p => <span key={p.name} style={{ fontFamily: V.font_display, fontSize: 14, color: 'rgba(255,255,255,0.25)' }}>{p.name.toUpperCase()}</span>)}
+          </div>
+        </div>
       </section>
 
       {/* ═══ SPECIALS ═══ */}
-      <section style={{ padding: '60px 24px', borderBottom: B }}>
+      <section style={{ padding: '80px 24px' }}>
         <div style={{ maxWidth: 900, margin: '0 auto' }}>
           <Reveal><h2 style={S.h2}>SPECIALS & HAPPY HOUR</h2><div style={S.divider} /></Reveal>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 12, marginTop: 24 }}>
@@ -190,7 +173,7 @@ export default function App() {
       </section>
 
       {/* ═══ MENU ═══ */}
-      <section id="menu" style={{ padding: '60px 24px', background: 'var(--bg2)', borderBottom: B }}>
+      <section id="menu" style={{ padding: '80px 24px', background: 'var(--bg2)' }}>
         <div style={{ maxWidth: 900, margin: '0 auto' }}>
           <Reveal><h2 style={S.h2}>THE MENU</h2><div style={S.divider} /></Reveal>
           <Reveal delay={100}>
@@ -212,7 +195,7 @@ export default function App() {
             {MENU.find(c => c.category === activeCategory)?.items.map((item, i) => (
               <Reveal key={item.id} delay={i * 50}>
                 <div style={{ border: B, background: 'var(--surface)', overflow: 'hidden' }}>
-                  {item.img && <div style={{ height: 160, overflow: 'hidden', borderBottom: B }}>
+                  {item.img && <div style={{ height: 160, overflow: 'hidden' }}>
                     <img src={item.img} alt={item.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} loading="lazy" />
                   </div>}
                   <div style={{ padding: 16 }}>
@@ -247,7 +230,7 @@ export default function App() {
       </section>
 
       {/* ═══ MILL AVE BAR ═══ */}
-      <section style={{ padding: '60px 24px', borderBottom: B }}>
+      <section style={{ padding: '80px 24px' }}>
         <div style={{ maxWidth: 900, margin: '0 auto' }}>
           <Reveal><h2 style={S.h2}>MILL AVE — BEER WALL & COCKTAILS</h2><div style={S.divider} /></Reveal>
           <Reveal delay={100}>
@@ -276,7 +259,7 @@ export default function App() {
       </section>
 
       {/* ═══ OUR STORY ═══ */}
-      <section id="story" style={{ background: 'var(--bg)', color: '#fff', padding: '80px 24px', borderBottom: B }}>
+      <section id="story" style={{ background: 'var(--bg)', color: '#fff', padding: '80px 24px' }}>
         <div style={{ maxWidth: 1000, margin: '0 auto' }}>
           <Reveal><h2 style={{ ...S.h2, color: '#fff' }}>OUR STORY</h2><div style={{ ...S.divider, background: 'var(--red)' }} /></Reveal>
           <div style={{ display: 'flex', gap: 40, alignItems: 'center', flexWrap: 'wrap', marginTop: 32 }}>
@@ -300,7 +283,7 @@ export default function App() {
       </section>
 
       {/* ═══ REVIEWS ═══ */}
-      <section style={{ padding: '60px 24px', borderBottom: B }}>
+      <section style={{ padding: '80px 24px' }}>
         <div style={{ maxWidth: 900, margin: '0 auto' }}>
           <Reveal><h2 style={S.h2}>WHAT PEOPLE SAY</h2><div style={S.divider} /></Reveal>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 12, marginTop: 24 }}>
@@ -322,7 +305,7 @@ export default function App() {
       </section>
 
       {/* ═══ CATERING ═══ */}
-      <section id="catering" style={{ padding: '60px 24px', background: 'var(--bg2)', borderBottom: B }}>
+      <section id="catering" style={{ padding: '80px 24px', background: 'var(--bg2)' }}>
         <div style={{ maxWidth: 900, margin: '0 auto', textAlign: 'center' }}>
           <Reveal><h2 style={S.h2}>CATERING</h2><div style={S.divider} /><p style={{ fontSize: 15, color: 'var(--text2)', maxWidth: 460, margin: '16px auto 32px', lineHeight: 1.6 }}>Corporate events, birthday parties, game day — we cater everything. Feeds 10 to 500.</p></Reveal>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 12 }}>
@@ -346,7 +329,7 @@ export default function App() {
       </section>
 
       {/* ═══ LOYALTY ═══ */}
-      <section style={{ padding: '60px 24px', borderBottom: B }}>
+      <section style={{ padding: '80px 24px' }}>
         <div style={{ maxWidth: 500, margin: '0 auto', textAlign: 'center' }}>
           <Reveal><h2 style={S.h2}>REWARDS</h2><div style={S.divider} /></Reveal>
           <Reveal delay={100}>
@@ -372,7 +355,7 @@ export default function App() {
       </section>
 
       {/* ═══ LOCATIONS ═══ */}
-      <section id="locations" style={{ padding: '60px 24px', background: 'var(--bg2)', borderBottom: B }}>
+      <section id="locations" style={{ padding: '80px 24px', background: 'var(--bg2)' }}>
         <div style={{ maxWidth: 1000, margin: '0 auto' }}>
           <Reveal><h2 style={S.h2}>LOCATIONS</h2><div style={S.divider} /></Reveal>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: 12, marginTop: 24 }}>
@@ -396,7 +379,7 @@ export default function App() {
       </section>
 
       {/* ═══ GALLERY ═══ */}
-      <section style={{ padding: '60px 24px', borderBottom: B }}>
+      <section style={{ padding: '80px 24px' }}>
         <div style={{ maxWidth: 1000, margin: '0 auto' }}>
           <Reveal><h2 style={S.h2}>THE VIBE</h2><div style={S.divider} /></Reveal>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 12, marginTop: 24 }}>
@@ -413,7 +396,7 @@ export default function App() {
       </section>
 
       {/* ═══ NEWSLETTER ═══ */}
-      <section style={{ padding: '48px 24px', background: 'var(--bg)', color: '#fff', borderBottom: B }}>
+      <section style={{ padding: '48px 24px', background: 'var(--bg)', color: '#fff' }}>
         <div style={{ maxWidth: 500, margin: '0 auto', textAlign: 'center' }}>
           <div style={{ fontFamily: V.font_display, fontSize: 28, marginBottom: 8 }}>GET THE DROP</div>
           <div style={{ fontSize: 14, color: 'var(--muted)', marginBottom: 16 }}>New menu items, promos, and events — straight to your inbox.</div>
@@ -596,13 +579,13 @@ const S = {
 const drw = {
   backdrop: { position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', zIndex: 298 },
   panel: { position: 'fixed', top: 0, right: 0, bottom: 0, width: 400, maxWidth: '100vw', zIndex: 299, background: 'var(--surface)', borderLeft: B, display: 'flex', flexDirection: 'column', transition: 'transform 0.3s ease' },
-  header: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '16px', borderBottom: B },
+  header: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '16px' },
 }
 
 const mod = {
   backdrop: { position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', zIndex: 300, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24 },
   box: { background: 'var(--surface)', border: B, width: '100%', maxWidth: 440, maxHeight: '90vh', overflowY: 'auto' },
-  header: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '16px 20px', borderBottom: B },
+  header: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '16px 20px' },
   body: { padding: 20, display: 'flex', flexDirection: 'column', gap: 14 },
   field: { display: 'flex', flexDirection: 'column', gap: 4 },
   label: { fontFamily: V.font_display, fontSize: 14, color: 'var(--text)' },
