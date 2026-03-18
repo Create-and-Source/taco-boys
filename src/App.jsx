@@ -125,7 +125,7 @@ export default function App() {
         <img src={IMG.hero} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: 0.5 }} />
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.7) 100%)' }} />
         <div style={{ position: 'relative', zIndex: 2, textAlign: 'center', padding: '0 24px', opacity: heroVis ? 1 : 0, transform: heroVis ? 'none' : 'translateY(20px)', transition: 'all 0.8s ease 0.3s' }}>
-          <img src={IMG.logo} alt="Taco Boy's" style={{ height: 80, margin: '0 auto 24px', filter: 'brightness(10)' }} />
+          <img src={IMG.logo} alt="Taco Boy's" style={{ height: 80, margin: '0 auto 24px', filter: 'brightness(0) invert(1)' }} />
           <h1 style={{ fontFamily: V.font_display, fontSize: 'clamp(48px, 12vw, 120px)', color: '#fff', lineHeight: 0.95, letterSpacing: '0.04em', marginBottom: 16 }}>
             MESQUITE GRILLED<br /><span style={{ color: 'var(--red)' }}>SINCE 2019</span>
           </h1>
@@ -420,7 +420,7 @@ export default function App() {
 
       {/* ═══ FOOTER ═══ */}
       <footer style={{ padding: '40px 24px', textAlign: 'center', borderTop: B }}>
-        <img src={IMG.logo} alt="Taco Boy's" style={{ height: 50, margin: '0 auto 12px' }} />
+        <img src={IMG.logo} alt="Taco Boy's" style={{ height: 50, margin: '0 auto 12px', filter: 'brightness(0) invert(1)' }} />
         <div style={{ fontFamily: V.font_mono, fontSize: 9, letterSpacing: '0.2em', color: 'var(--muted)', marginBottom: 16 }}>SONORAN STYLE SINCE 2019</div>
         <div style={{ display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap', marginBottom: 16 }}>
           {[['Menu', '#menu'], ['Catering', '#catering'], ['Locations', '#locations'], ['Sign In', '#signin'], ['Instagram', 'https://instagram.com/aztacoboys']].map(([l, h]) => (
@@ -537,18 +537,18 @@ function Nav({ cartCount, onCartClick, mobileNav, setMobileNav }) {
   useEffect(() => { const fn = () => setScrolled(window.scrollY > 60); window.addEventListener('scroll', fn, { passive: true }); return () => window.removeEventListener('scroll', fn) }, [])
   return (
     <>
-      <nav style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 200, height: 64, display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 24px', background: scrolled ? 'rgba(255,255,255,0.97)' : 'transparent', borderBottom: scrolled ? B : '1px solid transparent', transition: 'all 0.3s ease' }}>
+      <nav style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 200, height: 64, display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 24px', background: scrolled ? 'rgba(26,21,18,0.95)' : 'transparent', backdropFilter: scrolled ? 'blur(16px)' : 'none', borderBottom: scrolled ? '1px solid var(--border)' : '1px solid transparent', transition: 'all 0.3s ease' }}>
         <a href="#" style={{ display: 'flex', alignItems: 'center' }}>
-          <img src={IMG.logo} alt="Taco Boy's" style={{ height: 40, objectFit: 'contain', filter: scrolled ? 'none' : 'brightness(10)' }} />
+          <img src={IMG.logo} alt="Taco Boy's" style={{ height: 40, objectFit: 'contain', filter: 'brightness(0) invert(1)' }} />
         </a>
         <div style={{ display: 'flex', gap: 20, alignItems: 'center' }} className="nav-desktop">
-          {['Menu', 'Catering', 'Locations'].map(l => <a key={l} href={`#${l.toLowerCase()}`} style={{ fontFamily: V.font_display, fontSize: 18, color: scrolled ? '#000' : '#fff' }}>{l.toUpperCase()}</a>)}
+          {['Menu', 'Catering', 'Locations'].map(l => <a key={l} href={`#${l.toLowerCase()}`} style={{ fontFamily: V.font_display, fontSize: 18, color: '#fff' }}>{l.toUpperCase()}</a>)}
           <a href="#signin" style={{ fontFamily: V.font_display, fontSize: 18, color: '#F5A623' }}>SIGN IN</a>
           <button onClick={onCartClick} style={{ padding: '8px 20px', background: 'var(--red)', color: '#fff', fontFamily: V.font_display, fontSize: 16, fontWeight: 700, border: 'none', display: 'flex', alignItems: 'center', gap: 6 }}>🌮 {cartCount > 0 ? cartCount : 'ORDER'}</button>
         </div>
         <div className="nav-mobile" style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-          <button onClick={onCartClick} style={{ fontSize: 18, position: 'relative', color: scrolled ? '#000' : '#fff' }}>🌮{cartCount > 0 && <span style={{ position: 'absolute', top: -6, right: -8, background: 'var(--red)', color: '#fff', fontSize: 9, fontWeight: 700, width: 16, height: 16, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{cartCount}</span>}</button>
-          <button onClick={() => setMobileNav(!mobileNav)} style={{ fontSize: 22, color: scrolled ? '#000' : '#fff' }}>{mobileNav ? '✕' : '☰'}</button>
+          <button onClick={onCartClick} style={{ fontSize: 18, position: 'relative', color: '#fff' }}>🌮{cartCount > 0 && <span style={{ position: 'absolute', top: -6, right: -8, background: 'var(--red)', color: '#fff', fontSize: 9, fontWeight: 700, width: 16, height: 16, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{cartCount}</span>}</button>
+          <button onClick={() => setMobileNav(!mobileNav)} style={{ fontSize: 22, color: '#fff' }}>{mobileNav ? '✕' : '☰'}</button>
         </div>
       </nav>
       {mobileNav && <div style={{ position: 'fixed', top: 64, left: 0, right: 0, bottom: 0, zIndex: 199, background: 'var(--surface)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 24 }}>

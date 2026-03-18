@@ -40,7 +40,7 @@ export default function Admin({ onBack }) {
       {/* Sidebar */}
       <div style={{ width: sidebarOpen ? 220 : 60, background: 'var(--bg)', color: '#fff', flexShrink: 0, transition: 'width 0.3s ease', overflow: 'hidden', position: 'sticky', top: 0, height: '100vh', display: 'flex', flexDirection: 'column' }}>
         <div style={{ padding: '16px 12px', borderBottom: '1px solid #333', display: 'flex', alignItems: 'center', gap: 8 }}>
-          <img src={IMG.logo} alt="" style={{ height: 28, filter: 'brightness(10)', flexShrink: 0 }} />
+          <img src={IMG.logo} alt="" style={{ height: 28, filter: 'brightness(0) invert(1)', flexShrink: 0 }} />
           {sidebarOpen && <div>
             <div style={{ fontFamily: V.font_display, fontSize: 16 }}>TACO BOY'S</div>
             <div style={{ fontFamily: V.font_mono, fontSize: 8, color: 'var(--text2)', letterSpacing: '0.15em' }}>ADMIN</div>
