@@ -37,24 +37,24 @@ export default function MemberPortal({ onBack }) {
   const [member] = useState(MEMBER)
 
   return (
-    <div style={{ minHeight: '100vh', background: '#fff' }}>
+    <div style={{ minHeight: '100vh', background: '#fff', color: '#1a1a1a' }}>
       {/* Header */}
       <div style={{ borderBottom: B, padding: '16px 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
           <img src={IMG.logo} alt="Taco Boy's" style={{ height: 32 }} />
           <span style={{ fontFamily: V.font_display, fontSize: 14, color: '#999' }}>REWARDS</span>
         </div>
-        <button onClick={onBack} style={{ fontFamily: V.font_display, fontSize: 14, color: 'var(--red)' }}>← BACK TO MENU</button>
+        <button onClick={onBack} style={{ fontFamily: V.font_display, fontSize: 14, color: '#D43D2F' }}>← BACK TO MENU</button>
       </div>
 
       {/* Welcome */}
       <div style={{ background: '#1a1512', color: '#fff', padding: '40px 24px', textAlign: 'center' }}>
-        <div style={{ width: 64, height: 64, background: 'var(--red)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 12px', fontSize: 28, fontFamily: V.font_display }}>{member.name.charAt(0)}</div>
+        <div style={{ width: 64, height: 64, background: '#D43D2F', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 12px', fontSize: 28, fontFamily: V.font_display }}>{member.name.charAt(0)}</div>
         <div style={{ fontFamily: V.font_display, fontSize: 32 }}>WELCOME BACK, {member.name.split(' ')[0].toUpperCase()}</div>
         <div style={{ fontSize: 13, color: '#999', marginTop: 4 }}>Member since {member.since} · {member.favoriteLocation}</div>
         <div style={{ display: 'inline-flex', gap: 0, border: '1px solid #D43D2F', marginTop: 20 }}>
           <div style={{ padding: '12px 24px', textAlign: 'center' }}>
-            <div style={{ fontFamily: V.font_display, fontSize: 36, color: 'var(--red)' }}>{member.points}</div>
+            <div style={{ fontFamily: V.font_display, fontSize: 36, color: '#D43D2F' }}>{member.points}</div>
             <div style={{ fontSize: 10, color: '#999', letterSpacing: '0.1em' }}>POINTS</div>
           </div>
           <div style={{ padding: '12px 24px', borderLeft: '1px solid #D43D2F', textAlign: 'center' }}>
@@ -65,7 +65,7 @@ export default function MemberPortal({ onBack }) {
         {/* Progress to next tier */}
         <div style={{ maxWidth: 300, margin: '16px auto 0' }}>
           <div style={{ height: 8, background: '#333', overflow: 'hidden' }}>
-            <div style={{ height: '100%', width: `${(member.points / member.nextTier.at) * 100}%`, background: 'var(--red)', transition: 'width 1s ease' }} />
+            <div style={{ height: '100%', width: `${(member.points / member.nextTier.at) * 100}%`, background: '#D43D2F', transition: 'width 1s ease' }} />
           </div>
           <div style={{ fontSize: 11, color: '#666', marginTop: 4 }}>{member.nextTier.at - member.points} pts to {member.nextTier.name}</div>
         </div>
@@ -77,8 +77,8 @@ export default function MemberPortal({ onBack }) {
           <button key={t} onClick={() => setTab(t)} style={{
             padding: '14px 20px', fontFamily: V.font_display, fontSize: 16, fontWeight: 700, whiteSpace: 'nowrap',
             background: tab === t ? '#fff' : 'transparent',
-            color: tab === t ? 'var(--red)' : '#666',
-            borderBottom: tab === t ? '3px solid var(--red)' : '3px solid transparent',
+            color: tab === t ? '#D43D2F' : '#666',
+            borderBottom: tab === t ? '3px solid #D43D2F' : '3px solid transparent',
             borderRight: '1px solid #ddd',
           }}>{t.toUpperCase()}</button>
         ))}
@@ -124,9 +124,9 @@ function DashboardTab({ member }) {
           { pts: 250, reward: 'FREE PLATO', available: member.points >= 250 },
         ].map((r, i) => (
           <div key={r.pts} style={{ padding: 16, borderRight: i < 2 ? B : 'none', textAlign: 'center', opacity: r.available ? 1 : 0.4 }}>
-            <div style={{ fontFamily: V.font_display, fontSize: 28, color: r.available ? 'var(--red)' : '#999' }}>{r.pts} PTS</div>
+            <div style={{ fontFamily: V.font_display, fontSize: 28, color: r.available ? '#D43D2F' : '#999' }}>{r.pts} PTS</div>
             <div style={{ fontFamily: V.font_display, fontSize: 14, marginBottom: 8 }}>{r.reward}</div>
-            {r.available && <button style={{ padding: '8px 16px', background: 'var(--red)', color: '#fff', fontFamily: V.font_display, fontSize: 12, border: 'none', cursor: 'pointer' }}>REDEEM</button>}
+            {r.available && <button style={{ padding: '8px 16px', background: '#D43D2F', color: '#fff', fontFamily: V.font_display, fontSize: 12, border: 'none', cursor: 'pointer' }}>REDEEM</button>}
           </div>
         ))}
       </div>
@@ -141,8 +141,8 @@ function DashboardTab({ member }) {
               <div style={{ fontSize: 12, color: '#999' }}>{o.date} · {o.location}</div>
             </div>
             <div style={{ textAlign: 'right' }}>
-              <div style={{ fontFamily: V.font_display, fontSize: 18, color: 'var(--red)' }}>${o.total}</div>
-              <button style={{ fontSize: 11, color: 'var(--red)', fontFamily: V.font_display }}>REORDER</button>
+              <div style={{ fontFamily: V.font_display, fontSize: 18, color: '#D43D2F' }}>${o.total}</div>
+              <button style={{ fontSize: 11, color: '#D43D2F', fontFamily: V.font_display }}>REORDER</button>
             </div>
           </div>
         ))}
@@ -160,15 +160,15 @@ function OrdersTab({ orders }) {
           <div key={o.id} style={{ padding: 16, borderBottom: i < orders.length - 1 ? B : 'none' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 }}>
               <span style={{ fontFamily: V.font_mono, fontSize: 13, fontWeight: 600 }}>{o.id}</span>
-              <span style={{ fontSize: 10, fontWeight: 700, padding: '2px 8px', background: o.status === 'Ready' ? '#37ca37' : o.status === 'Picked Up' ? '#f5f5f5' : 'var(--red)', color: o.status === 'Picked Up' ? '#999' : '#fff' }}>{o.status.toUpperCase()}</span>
+              <span style={{ fontSize: 10, fontWeight: 700, padding: '2px 8px', background: o.status === 'Ready' ? '#37ca37' : o.status === 'Picked Up' ? '#f5f5f5' : '#D43D2F', color: o.status === 'Picked Up' ? '#999' : '#fff' }}>{o.status.toUpperCase()}</span>
             </div>
             <div style={{ fontSize: 14, fontWeight: 600, marginBottom: 4 }}>{o.items}</div>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <span style={{ fontSize: 12, color: '#999' }}>{o.date} · {o.location}</span>
-              <span style={{ fontFamily: V.font_display, fontSize: 18, color: 'var(--red)' }}>${o.total}</span>
+              <span style={{ fontFamily: V.font_display, fontSize: 18, color: '#D43D2F' }}>${o.total}</span>
             </div>
             <div style={{ display: 'flex', gap: 8, marginTop: 10 }}>
-              <button style={{ padding: '6px 16px', background: 'var(--red)', color: '#fff', fontFamily: V.font_display, fontSize: 12, border: 'none', cursor: 'pointer' }}>REORDER</button>
+              <button style={{ padding: '6px 16px', background: '#D43D2F', color: '#fff', fontFamily: V.font_display, fontSize: 12, border: 'none', cursor: 'pointer' }}>REORDER</button>
               <button style={{ padding: '6px 16px', border: B, fontFamily: V.font_display, fontSize: 12, cursor: 'pointer' }}>RECEIPT</button>
             </div>
           </div>
@@ -195,7 +195,7 @@ function RewardsTab({ member }) {
           { val: member.orders.length, label: 'TOTAL ORDERS' },
         ].map((s, i) => (
           <div key={s.label} style={{ padding: 16, borderRight: i < 3 ? B : 'none', textAlign: 'center' }}>
-            <div style={{ fontFamily: V.font_display, fontSize: 28, color: 'var(--red)' }}>{s.val}</div>
+            <div style={{ fontFamily: V.font_display, fontSize: 28, color: '#D43D2F' }}>{s.val}</div>
             <div style={{ fontSize: 10, color: '#999', letterSpacing: '0.1em' }}>{s.label}</div>
           </div>
         ))}
@@ -211,12 +211,12 @@ function RewardsTab({ member }) {
           { pts: 500, reward: 'Free Family Pack', desc: 'Taco Family Pack (12) with your choice of 2 proteins' },
         ].map((r, i) => (
           <div key={r.pts} style={{ display: 'flex', alignItems: 'center', padding: '14px 16px', borderBottom: i < 3 ? B : 'none', gap: 16 }}>
-            <div style={{ fontFamily: V.font_display, fontSize: 24, color: member.points >= r.pts ? 'var(--red)' : '#ccc', minWidth: 80, textAlign: 'center' }}>{r.pts} PTS</div>
+            <div style={{ fontFamily: V.font_display, fontSize: 24, color: member.points >= r.pts ? '#D43D2F' : '#ccc', minWidth: 80, textAlign: 'center' }}>{r.pts} PTS</div>
             <div style={{ flex: 1 }}>
               <div style={{ fontFamily: V.font_display, fontSize: 16, color: member.points >= r.pts ? '#000' : '#999' }}>{r.reward.toUpperCase()}</div>
               <div style={{ fontSize: 12, color: '#999' }}>{r.desc}</div>
             </div>
-            {member.points >= r.pts && <button style={{ padding: '6px 14px', background: 'var(--red)', color: '#fff', fontFamily: V.font_display, fontSize: 12, border: 'none', cursor: 'pointer', whiteSpace: 'nowrap' }}>REDEEM</button>}
+            {member.points >= r.pts && <button style={{ padding: '6px 14px', background: '#D43D2F', color: '#fff', fontFamily: V.font_display, fontSize: 12, border: 'none', cursor: 'pointer', whiteSpace: 'nowrap' }}>REDEEM</button>}
           </div>
         ))}
       </div>
@@ -233,7 +233,7 @@ function RewardsTab({ member }) {
         {member.rewards.filter(r => r.redeemed).map((r, i) => (
           <div key={i} style={{ display: 'flex', justifyContent: 'space-between', padding: '10px 16px', borderBottom: B, fontSize: 13 }}>
             <span style={{ color: '#666' }}>Redeemed — {r.name}</span>
-            <span style={{ color: 'var(--red)', fontWeight: 700 }}>−{r.pts} pts</span>
+            <span style={{ color: '#D43D2F', fontWeight: 700 }}>−{r.pts} pts</span>
           </div>
         ))}
       </div>
@@ -252,14 +252,14 @@ function FavoritesTab({ favorites }) {
               <span style={{ fontSize: 20 }}>🌮</span>
               <span style={{ fontFamily: V.font_display, fontSize: 18 }}>{f.toUpperCase()}</span>
             </div>
-            <button style={{ padding: '8px 20px', background: 'var(--red)', color: '#fff', fontFamily: V.font_display, fontSize: 14, border: 'none', cursor: 'pointer' }}>ORDER</button>
+            <button style={{ padding: '8px 20px', background: '#D43D2F', color: '#fff', fontFamily: V.font_display, fontSize: 14, border: 'none', cursor: 'pointer' }}>ORDER</button>
           </div>
         ))}
       </div>
       <div style={{ marginTop: 24, padding: 20, border: '1px solid #D43D2F', textAlign: 'center' }}>
         <div style={{ fontFamily: V.font_display, fontSize: 20, marginBottom: 4 }}>QUICK REORDER</div>
         <div style={{ fontSize: 13, color: '#666', marginBottom: 12 }}>Order all your favorites in one tap</div>
-        <button style={{ padding: '12px 32px', background: 'var(--red)', color: '#fff', fontFamily: V.font_display, fontSize: 18, border: '2px solid #fff', cursor: 'pointer' }}>ORDER ALL FAVORITES</button>
+        <button style={{ padding: '12px 32px', background: '#D43D2F', color: '#fff', fontFamily: V.font_display, fontSize: 18, border: '2px solid #fff', cursor: 'pointer' }}>ORDER ALL FAVORITES</button>
       </div>
     </div>
   )
