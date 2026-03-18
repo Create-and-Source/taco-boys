@@ -401,7 +401,7 @@ function MarketingTab() {
             <div style={{ fontSize: 28, marginBottom: 8 }}>{m.icon}</div>
             <div style={{ fontFamily: V.font_display, fontSize: 18, marginBottom: 4 }}>{m.title}</div>
             <div style={{ fontSize: 13, color: '#999', marginBottom: 12 }}>{m.desc}</div>
-            <button style={{ padding: '8px 20px', background: '#D43D2F', color: '#1a1a1a', fontFamily: V.font_display, fontSize: 14, border: 'none', cursor: 'pointer' }}>{m.btn}</button>
+            <button onClick={() => alert(`${m.title} creator opening... This feature sends real ${m.title.toLowerCase()}s to your customer list.`)} style={{ padding: '8px 20px', background: '#D43D2F', color: '#fff', fontFamily: V.font_display, fontSize: 14, border: 'none', cursor: 'pointer', borderRadius: 'var(--r)' }}>{m.btn}</button>
           </div>
         ))}
       </div>

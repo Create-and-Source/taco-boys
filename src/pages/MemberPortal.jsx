@@ -86,32 +86,33 @@ export default function MemberPortal({ onBack }) {
 
       {/* Tab content */}
       <div style={{ maxWidth: 800, margin: '0 auto', padding: 24 }}>
-        {tab === 'Dashboard' && <DashboardTab member={member} />}
-        {tab === 'Orders' && <OrdersTab orders={member.orders} />}
+        {tab === 'Dashboard' && <DashboardTab member={member} setTab={setTab} onBack={onBack} />}
+        {tab === 'Orders' && <OrdersTab orders={member.orders} onBack={onBack} />}
         {tab === 'Rewards' && <RewardsTab member={member} />}
-        {tab === 'Favorites' && <FavoritesTab favorites={member.favorites} />}
+        {tab === 'Favorites' && <FavoritesTab favorites={member.favorites} onBack={onBack} />}
         {tab === 'Profile' && <ProfileTab member={member} />}
       </div>
     </div>
   )
 }
 
-function DashboardTab({ member }) {
+function DashboardTab({ member, setTab, onBack }) {
+  const actions = [
+    { icon: '🌮', label: 'REORDER LAST', sub: member.orders[0]?.items.split(',')[0], fn: () => { alert('Last order added to cart! Redirecting to menu...'); onBack() } },
+    { icon: '🎁', label: 'REDEEM REWARD', sub: `${member.points} pts available`, fn: () => setTab('Rewards') },
+    { icon: '📍', label: 'FIND LOCATION', sub: '6 spots in the Valley', fn: () => { window.location.hash = ''; setTimeout(() => document.getElementById('locations')?.scrollIntoView({ behavior: 'smooth' }), 100) } },
+    { icon: '📋', label: 'ORDER HISTORY', sub: `${member.orders.length} orders`, fn: () => setTab('Orders') },
+  ]
   return (
     <div>
       {/* Quick actions */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 0, border: B, marginBottom: 24 }}>
-        {[
-          { icon: '🌮', label: 'REORDER LAST', sub: member.orders[0]?.items.split(',')[0] },
-          { icon: '🎁', label: 'REDEEM REWARD', sub: `${member.points} pts available` },
-          { icon: '📍', label: 'FIND LOCATION', sub: '6 spots in the Valley' },
-          { icon: '📋', label: 'ORDER HISTORY', sub: `${member.orders.length} orders` },
-        ].map((a, i) => (
-          <div key={a.label} style={{ padding: 20, borderRight: i < 3 ? B : 'none', textAlign: 'center', cursor: 'pointer' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 12, marginBottom: 24 }}>
+        {actions.map((a) => (
+          <button key={a.label} onClick={a.fn} style={{ padding: 20, border: '1px solid #e5e5e5', borderRadius: 'var(--r)', textAlign: 'center', cursor: 'pointer', background: '#fff' }}>
             <div style={{ fontSize: 28, marginBottom: 8 }}>{a.icon}</div>
-            <div style={{ fontFamily: V.font_display, fontSize: 16 }}>{a.label}</div>
+            <div style={{ fontFamily: V.font_display, fontSize: 16, color: '#1a1a1a' }}>{a.label}</div>
             <div style={{ fontSize: 11, color: '#999', marginTop: 4 }}>{a.sub}</div>
-          </div>
+          </button>
         ))}
       </div>
 
@@ -126,7 +127,7 @@ function DashboardTab({ member }) {
           <div key={r.pts} style={{ padding: 16, borderRight: i < 2 ? B : 'none', textAlign: 'center', opacity: r.available ? 1 : 0.4 }}>
             <div style={{ fontFamily: V.font_display, fontSize: 28, color: r.available ? '#D43D2F' : '#999' }}>{r.pts} PTS</div>
             <div style={{ fontFamily: V.font_display, fontSize: 14, marginBottom: 8 }}>{r.reward}</div>
-            {r.available && <button style={{ padding: '8px 16px', background: '#D43D2F', color: '#fff', fontFamily: V.font_display, fontSize: 12, border: 'none', cursor: 'pointer' }}>REDEEM</button>}
+            {r.available && <button onClick={() => alert(`🎉 ${r.reward} redeemed! Show this screen at checkout. ${r.pts} points deducted.`)} style={{ padding: '8px 16px', background: '#D43D2F', color: '#fff', fontFamily: V.font_display, fontSize: 12, border: 'none', cursor: 'pointer' }}>REDEEM</button>}
           </div>
         ))}
       </div>
@@ -142,7 +143,7 @@ function DashboardTab({ member }) {
             </div>
             <div style={{ textAlign: 'right' }}>
               <div style={{ fontFamily: V.font_display, fontSize: 18, color: '#D43D2F' }}>${o.total}</div>
-              <button style={{ fontSize: 11, color: '#D43D2F', fontFamily: V.font_display }}>REORDER</button>
+              <button onClick={() => { alert('Order added to cart! Redirecting to menu...'); onBack() }} style={{ fontSize: 11, color: '#D43D2F', fontFamily: V.font_display }}>REORDER</button>
             </div>
           </div>
         ))}
@@ -151,7 +152,7 @@ function DashboardTab({ member }) {
   )
 }
 
-function OrdersTab({ orders }) {
+function OrdersTab({ orders, onBack }) {
   return (
     <div>
       <div style={{ fontFamily: V.font_display, fontSize: 22, marginBottom: 16 }}>ALL ORDERS</div>
@@ -168,8 +169,8 @@ function OrdersTab({ orders }) {
               <span style={{ fontFamily: V.font_display, fontSize: 18, color: '#D43D2F' }}>${o.total}</span>
             </div>
             <div style={{ display: 'flex', gap: 8, marginTop: 10 }}>
-              <button style={{ padding: '6px 16px', background: '#D43D2F', color: '#fff', fontFamily: V.font_display, fontSize: 12, border: 'none', cursor: 'pointer' }}>REORDER</button>
-              <button style={{ padding: '6px 16px', border: B, fontFamily: V.font_display, fontSize: 12, cursor: 'pointer' }}>RECEIPT</button>
+              <button onClick={() => { alert('Order added to cart! Redirecting to menu...'); onBack() }} style={{ padding: '6px 16px', background: '#D43D2F', color: '#fff', fontFamily: V.font_display, fontSize: 12, border: 'none', cursor: 'pointer' }}>REORDER</button>
+              <button onClick={() => alert(`📄 Receipt for ${o.id}\n\n${o.items}\n\nTotal: $${o.total}\nDate: ${o.date}\nLocation: ${o.location}\nStatus: ${o.status}`)} style={{ padding: '6px 16px', border: '1px solid #e5e5e5', fontFamily: V.font_display, fontSize: 12, cursor: 'pointer', color: '#1a1a1a', background: '#fff', borderRadius: 'var(--r)' }}>RECEIPT</button>
             </div>
           </div>
         ))}
@@ -216,7 +217,7 @@ function RewardsTab({ member }) {
               <div style={{ fontFamily: V.font_display, fontSize: 16, color: member.points >= r.pts ? '#000' : '#999' }}>{r.reward.toUpperCase()}</div>
               <div style={{ fontSize: 12, color: '#999' }}>{r.desc}</div>
             </div>
-            {member.points >= r.pts && <button style={{ padding: '6px 14px', background: '#D43D2F', color: '#fff', fontFamily: V.font_display, fontSize: 12, border: 'none', cursor: 'pointer', whiteSpace: 'nowrap' }}>REDEEM</button>}
+            {member.points >= r.pts && <button onClick={() => alert(`🎉 ${r.reward} redeemed for ${r.pts} points! Show this screen at any location.`)} style={{ padding: '6px 14px', background: '#D43D2F', color: '#fff', fontFamily: V.font_display, fontSize: 12, border: 'none', cursor: 'pointer', whiteSpace: 'nowrap' }}>REDEEM</button>}
           </div>
         ))}
       </div>
@@ -241,7 +242,7 @@ function RewardsTab({ member }) {
   )
 }
 
-function FavoritesTab({ favorites }) {
+function FavoritesTab({ favorites, onBack }) {
   return (
     <div>
       <div style={{ fontFamily: V.font_display, fontSize: 22, marginBottom: 16 }}>YOUR FAVORITES</div>
@@ -252,20 +253,21 @@ function FavoritesTab({ favorites }) {
               <span style={{ fontSize: 20 }}>🌮</span>
               <span style={{ fontFamily: V.font_display, fontSize: 18 }}>{f.toUpperCase()}</span>
             </div>
-            <button style={{ padding: '8px 20px', background: '#D43D2F', color: '#fff', fontFamily: V.font_display, fontSize: 14, border: 'none', cursor: 'pointer' }}>ORDER</button>
+            <button onClick={() => { alert(`${f} added to cart!`); onBack() }} style={{ padding: '8px 20px', background: '#D43D2F', color: '#fff', fontFamily: V.font_display, fontSize: 14, border: 'none', cursor: 'pointer' }}>ORDER</button>
           </div>
         ))}
       </div>
       <div style={{ marginTop: 24, padding: 20, border: '1px solid #D43D2F', textAlign: 'center' }}>
         <div style={{ fontFamily: V.font_display, fontSize: 20, marginBottom: 4 }}>QUICK REORDER</div>
         <div style={{ fontSize: 13, color: '#666', marginBottom: 12 }}>Order all your favorites in one tap</div>
-        <button style={{ padding: '12px 32px', background: '#D43D2F', color: '#fff', fontFamily: V.font_display, fontSize: 18, border: '2px solid #fff', cursor: 'pointer' }}>ORDER ALL FAVORITES</button>
+        <button onClick={() => { alert('All favorites added to cart! Redirecting to menu...'); onBack() }} style={{ padding: '12px 32px', background: '#D43D2F', color: '#fff', fontFamily: V.font_display, fontSize: 18, border: 'none', cursor: 'pointer', borderRadius: 'var(--r)' }}>ORDER ALL FAVORITES</button>
       </div>
     </div>
   )
 }
 
 function ProfileTab({ member }) {
+  const [prefs, setPrefs] = useState({ 'Order notifications (text)': true, 'Promo alerts': true, 'Email receipts': false, 'Birthday reward': true })
   return (
     <div>
       <div style={{ fontFamily: V.font_display, fontSize: 22, marginBottom: 16 }}>YOUR PROFILE</div>
@@ -288,17 +290,12 @@ function ProfileTab({ member }) {
       {/* Preferences */}
       <div style={{ fontFamily: V.font_display, fontSize: 18, marginBottom: 12 }}>PREFERENCES</div>
       <div style={{ border: B }}>
-        {[
-          { label: 'Order notifications (text)', on: true },
-          { label: 'Promo alerts', on: true },
-          { label: 'Email receipts', on: false },
-          { label: 'Birthday reward', on: true },
-        ].map((p, i) => (
-          <div key={p.label} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px 16px', borderBottom: i < 3 ? B : 'none' }}>
-            <span style={{ fontSize: 14 }}>{p.label}</span>
-            <div style={{ width: 40, height: 22, background: p.on ? '#37ca37' : '#ddd', position: 'relative', cursor: 'pointer' }}>
-              <div style={{ width: 18, height: 18, background: '#fff', position: 'absolute', top: 2, left: p.on ? 20 : 2, transition: 'left 0.2s', boxShadow: '0 1px 3px rgba(0,0,0,0.2)' }} />
-            </div>
+        {Object.entries(prefs).map(([label, on], i) => (
+          <div key={label} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px 16px', borderBottom: i < 3 ? B : 'none' }}>
+            <span style={{ fontSize: 14 }}>{label}</span>
+            <button onClick={() => setPrefs(p => ({ ...p, [label]: !p[label] }))} style={{ width: 40, height: 22, background: on ? '#37ca37' : '#ddd', position: 'relative', cursor: 'pointer', border: 'none', borderRadius: 11 }}>
+              <div style={{ width: 18, height: 18, background: '#fff', position: 'absolute', top: 2, left: on ? 20 : 2, transition: 'left 0.2s', boxShadow: '0 1px 3px rgba(0,0,0,0.2)', borderRadius: '50%' }} />
+            </button>
           </div>
         ))}
       </div>
