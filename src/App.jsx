@@ -111,7 +111,7 @@ export default function App() {
               <span style={{ fontFamily: V.font_display, fontWeight: 700, color: 'var(--red)' }}>${cartTotal.toFixed(2)}</span>
             </div>
             <button onClick={() => { setCartOpen(false); setCheckoutOpen(true) }} style={S.btn}>CHECKOUT →</button>
-            <button onClick={clearCart} style={{ width: '100%', padding: 8, color: 'var(--muted)', fontSize: 12, marginTop: 8 }}>Clear Cart</button>
+            <button onClick={clearCart} style={{ width: '100%', padding: 8, color: 'var(--text2)', fontSize: 12, marginTop: 8 }}>Clear Cart</button>
           </div>
         )}
       </div>
@@ -584,10 +584,10 @@ const drw = {
 
 const mod = {
   backdrop: { position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', zIndex: 300, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24 },
-  box: { background: 'var(--surface)', border: B, width: '100%', maxWidth: 440, maxHeight: '90vh', overflowY: 'auto' },
-  header: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '16px 20px' },
+  box: { background: '#fff', border: '1px solid #e5e5e5', borderRadius: 'var(--r)', width: '100%', maxWidth: 440, maxHeight: '90vh', overflowY: 'auto', color: '#1a1a1a' },
+  header: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '16px 20px', borderBottom: '1px solid #e5e5e5' },
   body: { padding: 20, display: 'flex', flexDirection: 'column', gap: 14 },
   field: { display: 'flex', flexDirection: 'column', gap: 4 },
-  label: { fontFamily: V.font_display, fontSize: 14, color: 'var(--text)' },
-  input: { padding: '12px 14px', border: '1px solid #cbd5e0', background: '#F7FAFC', color: 'var(--text)', fontSize: 14, fontFamily: V.font_body },
+  label: { fontFamily: V.font_display, fontSize: 14, color: '#1a1a1a' },
+  input: { padding: '12px 14px', border: '1px solid #e5e5e5', background: '#f5f5f2', color: '#1a1a1a', fontSize: 14, fontFamily: V.font_body, borderRadius: 'var(--r)' },
 }
