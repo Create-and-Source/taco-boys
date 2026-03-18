@@ -38,8 +38,8 @@ export default function Admin({ onBack }) {
   return (
     <div style={{ display: 'flex', minHeight: '100vh', background: 'var(--bg2)' }}>
       {/* Sidebar */}
-      <div style={{ width: sidebarOpen ? 220 : 60, background: 'var(--bg)', color: '#fff', flexShrink: 0, transition: 'width 0.3s ease', overflow: 'hidden', position: 'sticky', top: 0, height: '100vh', display: 'flex', flexDirection: 'column' }}>
-        <div style={{ padding: '16px 12px', borderBottom: '1px solid #333', display: 'flex', alignItems: 'center', gap: 8 }}>
+      <div style={{ width: sidebarOpen ? 220 : 60, background: 'var(--bg)', color: 'var(--text)', flexShrink: 0, transition: 'width 0.3s ease', overflow: 'hidden', position: 'sticky', top: 0, height: '100vh', display: 'flex', flexDirection: 'column' }}>
+        <div style={{ padding: '16px 12px', borderBottom: '1px solid var(--border)', display: 'flex', alignItems: 'center', gap: 8 }}>
           <img src={IMG.logo} alt="" style={{ height: 28, filter: 'brightness(0) invert(1)', flexShrink: 0 }} />
           {sidebarOpen && <div>
             <div style={{ fontFamily: V.font_display, fontSize: 16 }}>TACO BOY'S</div>
@@ -51,19 +51,19 @@ export default function Admin({ onBack }) {
             <button key={item.id} onClick={() => setTab(item.id)} style={{
               display: 'flex', alignItems: 'center', gap: 10, padding: '10px 10px', textAlign: 'left', width: '100%',
               background: tab === item.id ? 'rgba(233,61,61,0.15)' : 'transparent',
-              color: tab === item.id ? 'var(--red)' : '#999',
+              color: tab === item.id ? 'var(--red)' : 'var(--muted)',
               fontSize: 13, fontWeight: tab === item.id ? 700 : 400, whiteSpace: 'nowrap',
               transition: 'all 0.2s', borderLeft: tab === item.id ? '3px solid var(--red)' : '3px solid transparent',
             }}>
               <span style={{ fontSize: 16, flexShrink: 0, width: 24, textAlign: 'center' }}>{item.icon}</span>
               {sidebarOpen && <span>{item.label}</span>}
               {sidebarOpen && item.badge && activeOrders.length > 0 && (
-                <span style={{ marginLeft: 'auto', background: 'var(--red)', color: '#fff', fontSize: 10, fontWeight: 700, padding: '1px 6px', borderRadius: 100 }}>{activeOrders.length}</span>
+                <span style={{ marginLeft: 'auto', background: 'var(--red)', color: 'var(--text)', fontSize: 10, fontWeight: 700, padding: '1px 6px', borderRadius: 100 }}>{activeOrders.length}</span>
               )}
             </button>
           ))}
         </div>
-        <button onClick={onBack} style={{ padding: '14px 12px', borderTop: '1px solid #333', fontSize: 12, color: 'var(--text2)', textAlign: 'left', display: 'flex', alignItems: 'center', gap: 8 }}>
+        <button onClick={onBack} style={{ padding: '14px 12px', borderTop: '1px solid var(--border)', fontSize: 12, color: 'var(--text2)', textAlign: 'left', display: 'flex', alignItems: 'center', gap: 8 }}>
           <span>←</span> {sidebarOpen && 'Back to Store'}
         </button>
       </div>
@@ -75,13 +75,13 @@ export default function Admin({ onBack }) {
           {[
             { label: 'TODAY', value: `$${todayRev.toLocaleString()}`, sub: `${todayOrd.length} orders` },
             { label: 'THIS WEEK', value: `$${weekRev.toLocaleString()}`, sub: '' },
-            { label: 'ACTIVE', value: activeOrders.length, sub: 'orders now', color: activeOrders.length > 0 ? '#37ca37' : '#999' },
+            { label: 'ACTIVE', value: activeOrders.length, sub: 'orders now', color: activeOrders.length > 0 ? '#37ca37' : 'var(--muted)' },
             { label: 'CUSTOMERS', value: customers.length, sub: 'total' },
             { label: 'CATERING', value: catering.filter(c => c.status === 'New').length, sub: 'pending', color: 'var(--red)' },
           ].map((k, i) => (
             <div key={k.label} style={{ flex: 1, padding: '16px 12px', borderRight: i < 4 ? B : 'none', textAlign: 'center' }}>
               <div style={{ fontFamily: V.font_mono, fontSize: 9, letterSpacing: '0.15em', color: 'var(--muted)', marginBottom: 4 }}>{k.label}</div>
-              <div style={{ fontFamily: V.font_display, fontSize: 28, color: k.color || '#000' }}>{k.value}</div>
+              <div style={{ fontFamily: V.font_display, fontSize: 28, color: k.color || 'var(--text)' }}>{k.value}</div>
               {k.sub && <div style={{ fontSize: 11, color: 'var(--muted)' }}>{k.sub}</div>}
             </div>
           ))}
@@ -131,7 +131,7 @@ function DashboardTab({ orders, topItems, activeOrders, onStatus, customers }) {
           {topItems.map((item, i) => (
             <div key={item.name} style={{ display: 'flex', justifyContent: 'space-between', padding: '10px 16px', borderBottom: i < topItems.length - 1 ? B : 'none', alignItems: 'center' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                <span style={{ fontFamily: V.font_display, fontSize: 16, color: i === 0 ? 'var(--red)' : '#ccc', minWidth: 28 }}>#{i + 1}</span>
+                <span style={{ fontFamily: V.font_display, fontSize: 16, color: i === 0 ? 'var(--red)' : 'var(--text2)', minWidth: 28 }}>#{i + 1}</span>
                 <span style={{ fontSize: 14, fontWeight: 600 }}>{item.name}</span>
               </div>
               <span style={{ fontFamily: V.font_mono, fontSize: 12, color: 'var(--muted)' }}>{item.qty} sold</span>
@@ -164,7 +164,7 @@ function OrderCard({ order: o, onStatus, borderRight }) {
     <div style={{ padding: 16, borderRight: borderRight ? B : 'none', background: 'var(--surface)' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 6 }}>
         <span style={{ fontFamily: V.font_mono, fontSize: 13, fontWeight: 600 }}>{o.id}</span>
-        <span style={{ fontSize: 10, fontWeight: 700, padding: '2px 8px', background: statusColors[o.status], color: '#fff' }}>{o.status.toUpperCase()}</span>
+        <span style={{ fontSize: 10, fontWeight: 700, padding: '2px 8px', background: statusColors[o.status], color: 'var(--text)' }}>{o.status.toUpperCase()}</span>
       </div>
       <div style={{ fontWeight: 700, fontSize: 15, marginBottom: 2 }}>{o.name}</div>
       <div style={{ fontSize: 12, color: 'var(--muted)', marginBottom: 8 }}>{o.type} · {o.location} · {timeAgo(o.createdAt)}</div>
@@ -173,7 +173,7 @@ function OrderCard({ order: o, onStatus, borderRight }) {
       ))}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 10 }}>
         <span style={{ fontFamily: V.font_display, fontSize: 22, color: 'var(--red)' }}>${o.total?.toFixed(2)}</span>
-        {next[o.status] && <button onClick={() => onStatus(o.id, next[o.status])} style={{ padding: '6px 14px', background: 'var(--red)', color: '#fff', fontFamily: V.font_display, fontSize: 12, border: 'none', cursor: 'pointer' }}>→ {next[o.status].toUpperCase()}</button>}
+        {next[o.status] && <button onClick={() => onStatus(o.id, next[o.status])} style={{ padding: '6px 14px', background: 'var(--red)', color: 'var(--text)', fontFamily: V.font_display, fontSize: 12, border: 'none', cursor: 'pointer' }}>→ {next[o.status].toUpperCase()}</button>}
       </div>
     </div>
   )
@@ -188,7 +188,7 @@ function OrdersTab({ orders, onStatus }) {
       <SectionTitle>ORDERS</SectionTitle>
       <div style={{ display: 'flex', gap: 0, border: B, marginBottom: 16 }}>
         {['All', 'New', 'Preparing', 'Ready', 'Picked Up', 'Delivered'].map(f => (
-          <button key={f} onClick={() => setFilter(f)} style={{ padding: '10px 16px', fontFamily: V.font_display, fontSize: 14, background: filter === f ? 'var(--red)' : '#fff', color: filter === f ? '#fff' : '#000', borderRight: B, flex: 1 }}>{f.toUpperCase()}</button>
+          <button key={f} onClick={() => setFilter(f)} style={{ padding: '10px 16px', fontFamily: V.font_display, fontSize: 14, background: filter === f ? 'var(--red)' : 'var(--text)', color: filter === f ? 'var(--text)' : 'var(--text)', borderRight: B, flex: 1 }}>{f.toUpperCase()}</button>
         ))}
       </div>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 0, border: B }}>
@@ -212,10 +212,10 @@ function MenuTab() {
             {cat.items.map((item, i) => (
               <div key={item.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 16px', borderBottom: i < cat.items.length - 1 ? B : 'none' }}>
                 <div>
-                  <span style={{ fontWeight: 600, color: enabled[item.id] ? '#000' : '#ccc' }}>{item.name}</span>
+                  <span style={{ fontWeight: 600, color: enabled[item.id] ? 'var(--text)' : 'var(--text2)' }}>{item.name}</span>
                   <span style={{ fontSize: 12, color: 'var(--muted)', marginLeft: 8 }}>${item.price}</span>
                 </div>
-                <button onClick={() => setEnabled(p => ({ ...p, [item.id]: !p[item.id] }))} style={{ width: 40, height: 22, background: enabled[item.id] ? '#37ca37' : '#ddd', position: 'relative', border: 'none', cursor: 'pointer' }}>
+                <button onClick={() => setEnabled(p => ({ ...p, [item.id]: !p[item.id] }))} style={{ width: 40, height: 22, background: enabled[item.id] ? '#37ca37' : 'var(--border)', position: 'relative', border: 'none', cursor: 'pointer' }}>
                   <div style={{ width: 18, height: 18, background: 'var(--surface)', position: 'absolute', top: 2, left: enabled[item.id] ? 20 : 2, transition: 'left 0.2s', boxShadow: '0 1px 3px rgba(0,0,0,0.2)' }} />
                 </button>
               </div>
@@ -303,7 +303,7 @@ function CateringTab({ requests }) {
           <div key={r.id} style={{ padding: 16, borderBottom: i < requests.length - 1 ? B : 'none' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 6 }}>
               <span style={{ fontWeight: 700, fontSize: 15 }}>{r.name}</span>
-              <span style={{ fontSize: 10, fontWeight: 700, padding: '2px 8px', background: r.status === 'Confirmed' ? '#37ca37' : 'var(--red)', color: '#fff' }}>{r.status.toUpperCase()}</span>
+              <span style={{ fontSize: 10, fontWeight: 700, padding: '2px 8px', background: r.status === 'Confirmed' ? '#37ca37' : 'var(--red)', color: 'var(--text)' }}>{r.status.toUpperCase()}</span>
             </div>
             <div style={{ fontSize: 13, color: 'var(--text2)' }}>📅 {r.date} · 👥 {r.guests} guests · 📞 {r.phone}</div>
             {r.details && <div style={{ fontSize: 13, color: 'var(--muted)', fontStyle: 'italic', marginTop: 4 }}>{r.details}</div>}
@@ -326,7 +326,7 @@ function LocationsTab() {
             <div style={{ fontSize: 13, color: 'var(--text2)', marginBottom: 2 }}>{l.addr}</div>
             <div style={{ fontFamily: V.font_mono, fontSize: 10, color: 'var(--muted)', marginBottom: 2 }}>{l.hours}</div>
             <div style={{ fontSize: 13, color: 'var(--red)', fontWeight: 600 }}>{l.phone}</div>
-            {l.flag && <div style={{ marginTop: 6, display: 'inline-block', padding: '2px 8px', background: 'var(--red)', color: '#fff', fontSize: 10, fontWeight: 700 }}>{l.flag}</div>}
+            {l.flag && <div style={{ marginTop: 6, display: 'inline-block', padding: '2px 8px', background: 'var(--red)', color: 'var(--text)', fontSize: 10, fontWeight: 700 }}>{l.flag}</div>}
           </div>
         ))}
       </div>
@@ -359,7 +359,7 @@ function AnalyticsTab({ orders, topItems, weekRev, customers }) {
           <div style={{ fontFamily: V.font_display, fontSize: 18, marginBottom: 12 }}>TOP ITEMS</div>
           {topItems.map((item, i) => (
             <div key={item.name} style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 0' }}>
-              <span style={{ fontSize: 13 }}><span style={{ fontFamily: V.font_display, color: i === 0 ? 'var(--red)' : '#ccc', marginRight: 6 }}>#{i + 1}</span>{item.name}</span>
+              <span style={{ fontSize: 13 }}><span style={{ fontFamily: V.font_display, color: i === 0 ? 'var(--red)' : 'var(--text2)', marginRight: 6 }}>#{i + 1}</span>{item.name}</span>
               <span style={{ fontFamily: V.font_mono, fontSize: 12, color: 'var(--muted)' }}>{item.qty}</span>
             </div>
           ))}
@@ -401,7 +401,7 @@ function MarketingTab() {
             <div style={{ fontSize: 28, marginBottom: 8 }}>{m.icon}</div>
             <div style={{ fontFamily: V.font_display, fontSize: 18, marginBottom: 4 }}>{m.title}</div>
             <div style={{ fontSize: 13, color: 'var(--muted)', marginBottom: 12 }}>{m.desc}</div>
-            <button style={{ padding: '8px 20px', background: 'var(--red)', color: '#fff', fontFamily: V.font_display, fontSize: 14, border: 'none', cursor: 'pointer' }}>{m.btn}</button>
+            <button style={{ padding: '8px 20px', background: 'var(--red)', color: 'var(--text)', fontFamily: V.font_display, fontSize: 14, border: 'none', cursor: 'pointer' }}>{m.btn}</button>
           </div>
         ))}
       </div>

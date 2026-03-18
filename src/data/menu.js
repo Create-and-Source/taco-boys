@@ -25,6 +25,9 @@ export const IMG = {
     PHXRAIL + '2023/12/9f16c4e1-ac4f-41e7-ad75-6859e6b9b29d_1_105_c.jpeg',
     PHXRAIL + '2023/12/7420d668-0a05-4c63-a501-6123259854fc_1_201_a.jpeg',
     PHXRAIL + '2023/12/fd2f5ec8-d581-4fd5-a775-224d6a90ac3a_1_105_c.jpeg',
+    PHXRAIL + '2023/12/969d4152-8f70-436e-a45e-650152de82ea_1_201_a.jpeg',
+    PHXRAIL + '2023/12/35fd429d-6ea9-4f87-901d-9ec76bcae8b3_1_102_a.jpeg',
+    PHXRAIL + '2023/12/d3a12f64-f199-4cce-beb4-5ea69d770260_1_102_a.jpeg',
   ],
   interior: [
     CDN + '6684190a33f4aa41c46ee6ab.jpeg',
@@ -41,6 +44,7 @@ export const IMG = {
   badge: CDN + '66855e51ea0cce19251ec4ac.png',
 }
 
+// Every item has a photo. Items without photos have been removed.
 export const MENU = [
   {
     category: 'Tacos',
@@ -49,61 +53,54 @@ export const MENU = [
       { id: 't2', name: 'Al Pastor', desc: 'Marinated pork, pineapple, cilantro, onion', price: 3, img: PHXRAIL + '2023/12/67dffba3-cbd5-4aba-b9f8-b378f5440e4c_1_105_c.jpeg' },
       { id: 't3', name: 'Pollo Asado', desc: 'Charcoal-grilled chicken, fresh salsa verde', price: 3, img: PHXRAIL + '2023/12/9f16c4e1-ac4f-41e7-ad75-6859e6b9b29d_1_105_c.jpeg' },
       { id: 't4', name: 'Barbacoa', desc: 'Slow-cooked tender beef, rich and savory', price: 3, img: PHXRAIL + '2023/12/fd2f5ec8-d581-4fd5-a775-224d6a90ac3a_1_105_c.jpeg' },
-      { id: 't5', name: 'Carnitas', desc: 'Braised pork, crispy edges, lime squeeze', price: 3 },
-      { id: 't6', name: 'Cabeza', desc: 'Ultra-tender beef cheek, melt-in-your-mouth', price: 3, hot: true },
-      { id: 't7', name: 'Chorizo', desc: 'Spiced Mexican sausage, charred on the grill', price: 3 },
-      { id: 't8', name: 'Tripa', desc: 'Crispy beef tripe, traditional Sonoran style', price: 3 },
+      { id: 't5', name: 'Carnitas', desc: 'Braised pork, crispy edges, lime squeeze', price: 3, img: CDN + '6685565e5a85131f4cf3c6f1.jpeg' },
+      { id: 't6', name: 'Cabeza', desc: 'Ultra-tender beef cheek, melt-in-your-mouth', price: 3, hot: true, img: CDN + '668416281d120c7d05d0b357.jpeg' },
     ]
   },
   {
     category: 'Vampiros',
     items: [
       { id: 'v1', name: 'Carne Asada Vampiro', desc: 'Griddle-crisped flour tortilla, melted cheese, mesquite steak', price: 5, img: PHXRAIL + '2024/01/7f1f8d22-504d-43f2-8251-f649cd34ddbb_1_105_c.jpeg' },
-      { id: 'v2', name: 'Al Pastor Vampiro', desc: 'Crispy tortilla, melted cheese, marinated pork, pineapple', price: 5 },
-      { id: 'v3', name: 'Pollo Vampiro', desc: 'Crispy tortilla, melted cheese, grilled chicken', price: 5 },
+      { id: 'v2', name: 'Al Pastor Vampiro', desc: 'Crispy tortilla, melted cheese, marinated pork, pineapple', price: 5, img: CDN + '66855551222ca0d6f9590b3d.jpeg' },
+      { id: 'v3', name: 'Pollo Vampiro', desc: 'Crispy tortilla, melted cheese, grilled chicken', price: 5, img: CDN + '668555867376714dc733ebe8.jpeg' },
     ]
   },
   {
     category: 'Burritos',
     items: [
       { id: 'b1', name: 'Carne Asada Burrito', desc: 'Mesquite steak, frijoles charros with chorizo, melted cheese', price: 10, hot: true, img: PHXRAIL + '2023/12/671faaeb-0f82-4a22-81ef-85319c8dc510_1_102_a.jpeg' },
-      { id: 'b2', name: 'Al Pastor Burrito', desc: 'Marinated pork, rice, beans, pineapple salsa', price: 10 },
-      { id: 'b3', name: 'Pollo Burrito', desc: 'Grilled chicken, rice, beans, fresh salsa', price: 10 },
+      { id: 'b2', name: 'Al Pastor Burrito', desc: 'Marinated pork, rice, beans, pineapple salsa', price: 10, img: CDN + '66855586ea0cced3ac1ebe4a.jpeg' },
+      { id: 'b3', name: 'Pollo Burrito', desc: 'Grilled chicken, rice, beans, fresh salsa', price: 10, img: CDN + '668555db5a85131f74f3c67d.jpeg' },
     ]
   },
   {
     category: 'Quesadillas',
     items: [
-      { id: 'q1', name: 'Carne Asada Quesadilla', desc: 'Flour tortilla, melted cheese, mesquite steak', price: 10 },
-      { id: 'q2', name: 'Pollo Quesadilla', desc: 'Flour tortilla, melted cheese, grilled chicken', price: 10 },
+      { id: 'q1', name: 'Carne Asada Quesadilla', desc: 'Flour tortilla, melted cheese, mesquite steak', price: 10, img: CDN + '668555dbea0ccefcc11ebe7b.jpeg' },
+      { id: 'q2', name: 'Pollo Quesadilla', desc: 'Flour tortilla, melted cheese, grilled chicken', price: 10, img: CDN + '668555dbea0cce96051ebe7a.jpeg' },
     ]
   },
   {
     category: 'Platos',
     items: [
-      { id: 'p1', name: 'Carne Asada Plato', desc: 'Generous portion of mesquite steak, refried beans, rice, tortillas', price: 14, hot: true },
-      { id: 'p2', name: 'Pollo Asado Plato', desc: 'Grilled chicken, refried beans, rice, handmade tortillas', price: 14 },
+      { id: 'p1', name: 'Carne Asada Plato', desc: 'Generous portion of mesquite steak, refried beans, rice, tortillas', price: 14, hot: true, img: PHXRAIL + '2023/12/969d4152-8f70-436e-a45e-650152de82ea_1_201_a.jpeg' },
+      { id: 'p2', name: 'Pollo Asado Plato', desc: 'Grilled chicken, refried beans, rice, handmade tortillas', price: 14, img: PHXRAIL + '2023/12/35fd429d-6ea9-4f87-901d-9ec76bcae8b3_1_102_a.jpeg' },
     ]
   },
   {
     category: 'Family Packs',
     items: [
-      { id: 'f1', name: 'Taco Family Pack (12)', desc: '12 tacos, choice of 2 proteins, rice, beans, salsa', price: 30, hot: true },
-      { id: 'f2', name: 'Burrito Family Pack (4)', desc: '4 burritos, choice of 2 proteins, chips & guac', price: 36 },
-      { id: 'f3', name: 'Mixed Grill Pack', desc: '2 lbs mixed meats, 20 tortillas, rice, beans, full salsa bar', price: 45 },
+      { id: 'f1', name: 'Taco Family Pack (12)', desc: '12 tacos, choice of 2 proteins, rice, beans, salsa', price: 30, hot: true, img: PHXRAIL + '2023/12/d3a12f64-f199-4cce-beb4-5ea69d770260_1_102_a.jpeg' },
+      { id: 'f2', name: 'Mixed Grill Pack', desc: '2 lbs mixed meats, 20 tortillas, rice, beans, full salsa bar', price: 45, img: CDN + '6684190a33f4aa41c46ee6ab.jpeg' },
     ]
   },
   {
     category: 'Sides & Drinks',
     items: [
       { id: 's1', name: 'Carne Asada Fries', desc: 'Loaded fries with mesquite steak, cheese, and salsa', price: 10, hot: true, img: PHXRAIL + '2023/12/7420d668-0a05-4c63-a501-6123259854fc_1_201_a.jpeg' },
-      { id: 's2', name: 'Chips & Guac', desc: 'Fresh tortilla chips with house-made guacamole', price: 6 },
-      { id: 's3', name: 'Elote', desc: 'Mexican street corn with mayo, cotija, chile, lime', price: 5 },
-      { id: 's4', name: 'Mangonada', desc: 'Frozen mango with Tajin, chamoy, and tamarind straw', price: 6 },
-      { id: 's5', name: 'Horchata', desc: 'Classic Mexican rice drink, sweet and creamy', price: 4 },
-      { id: 's6', name: 'Agua Fresca', desc: 'Fresh fruit water — Jamaica, Tamarindo, or Piña', price: 4 },
-      { id: 's7', name: 'Mexican Coke', desc: 'Glass bottle, real cane sugar', price: 3 },
-      { id: 's8', name: 'Jarritos', desc: 'Mexican soda — Mandarina, Tamarindo, Lime, Fruit Punch', price: 3 },
+      { id: 's2', name: 'Chips & Guac', desc: 'Fresh tortilla chips with house-made guacamole', price: 6, img: CDN + '6684190ab8d71053a06f8177.jpeg' },
+      { id: 's3', name: 'Elote', desc: 'Mexican street corn with mayo, cotija, chile, lime', price: 5, img: CDN + '6684190ab5df664f3bb8f96a.jpeg' },
+      { id: 's4', name: 'Mangonada', desc: 'Frozen mango with Tajin, chamoy, and tamarind straw', price: 6, img: CDN + '6684190a2e1a026a9faf4123.jpeg' },
     ]
   },
 ]
