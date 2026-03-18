@@ -108,7 +108,7 @@ function DashboardTab({ member, setTab, onBack }) {
       {/* Quick actions */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 12, marginBottom: 24 }}>
         {actions.map((a) => (
-          <button key={a.label} onClick={a.fn} style={{ padding: 20, border: '1px solid #e5e5e5', borderRadius: 'var(--r)', textAlign: 'center', cursor: 'pointer', background: '#fff' }}>
+          <button key={a.label} onClick={a.fn} style={{ padding: 20, border: '1px solid #e5e5e5', borderRadius: '8px', textAlign: 'center', cursor: 'pointer', background: '#fff' }}>
             <div style={{ fontSize: 28, marginBottom: 8 }}>{a.icon}</div>
             <div style={{ fontFamily: V.font_display, fontSize: 16, color: '#1a1a1a' }}>{a.label}</div>
             <div style={{ fontSize: 11, color: '#999', marginTop: 4 }}>{a.sub}</div>
@@ -170,7 +170,7 @@ function OrdersTab({ orders, onBack }) {
             </div>
             <div style={{ display: 'flex', gap: 8, marginTop: 10 }}>
               <button onClick={() => { alert('Order added to cart! Redirecting to menu...'); onBack() }} style={{ padding: '6px 16px', background: '#D43D2F', color: '#fff', fontFamily: V.font_display, fontSize: 12, border: 'none', cursor: 'pointer' }}>REORDER</button>
-              <button onClick={() => alert(`📄 Receipt for ${o.id}\n\n${o.items}\n\nTotal: $${o.total}\nDate: ${o.date}\nLocation: ${o.location}\nStatus: ${o.status}`)} style={{ padding: '6px 16px', border: '1px solid #e5e5e5', fontFamily: V.font_display, fontSize: 12, cursor: 'pointer', color: '#1a1a1a', background: '#fff', borderRadius: 'var(--r)' }}>RECEIPT</button>
+              <button onClick={() => alert(`📄 Receipt for ${o.id}\n\n${o.items}\n\nTotal: $${o.total}\nDate: ${o.date}\nLocation: ${o.location}\nStatus: ${o.status}`)} style={{ padding: '6px 16px', border: '1px solid #e5e5e5', fontFamily: V.font_display, fontSize: 12, cursor: 'pointer', color: '#1a1a1a', background: '#fff', borderRadius: '8px' }}>RECEIPT</button>
             </div>
           </div>
         ))}
@@ -260,7 +260,7 @@ function FavoritesTab({ favorites, onBack }) {
       <div style={{ marginTop: 24, padding: 20, border: '1px solid #D43D2F', textAlign: 'center' }}>
         <div style={{ fontFamily: V.font_display, fontSize: 20, marginBottom: 4 }}>QUICK REORDER</div>
         <div style={{ fontSize: 13, color: '#666', marginBottom: 12 }}>Order all your favorites in one tap</div>
-        <button onClick={() => { alert('All favorites added to cart! Redirecting to menu...'); onBack() }} style={{ padding: '12px 32px', background: '#D43D2F', color: '#fff', fontFamily: V.font_display, fontSize: 18, border: 'none', cursor: 'pointer', borderRadius: 'var(--r)' }}>ORDER ALL FAVORITES</button>
+        <button onClick={() => { alert('All favorites added to cart! Redirecting to menu...'); onBack() }} style={{ padding: '12px 32px', background: '#D43D2F', color: '#fff', fontFamily: V.font_display, fontSize: 18, border: 'none', cursor: 'pointer', borderRadius: '8px' }}>ORDER ALL FAVORITES</button>
       </div>
     </div>
   )

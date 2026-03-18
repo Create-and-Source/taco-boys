@@ -24,9 +24,9 @@ export default function SignIn({ onSignIn }) {
             <BtnGhost onClick={() => onSignIn('guest')}>CONTINUE AS GUEST</BtnGhost>
           </div>
 
-          <div style={{ height: 1, background: 'var(--border)', margin: '16px 0' }} />
+          <div style={{ height: 1, background: '#e5e5e5', margin: '16px 0' }} />
 
-          <div style={{ display: 'flex', gap: 0, border: '1px solid #e5e5e5', borderRadius: 'var(--r)', overflow: 'hidden', marginTop: 8 }}>
+          <div style={{ display: 'flex', gap: 0, border: '1px solid #e5e5e5', borderRadius: '8px', overflow: 'hidden', marginTop: 8 }}>
             {[
               { id: 'owner', label: 'OWNER', icon: '👑' },
               { id: 'manager', label: 'MANAGER', icon: '📋' },
@@ -34,7 +34,7 @@ export default function SignIn({ onSignIn }) {
             ].map((role, i) => (
               <button key={role.id} onClick={() => onSignIn('admin')} style={{
                 flex: 1, padding: '14px 8px', background: '#f5f5f2', color: '#1a1a1a',
-                fontFamily: V.font_display, fontSize: 13, borderRight: i < 2 ? '1px solid var(--border)' : 'none',
+                fontFamily: V.font_display, fontSize: 13, borderRight: i < 2 ? '1px solid #e5e5e5' : 'none',
                 textAlign: 'center',
               }}>
                 <div style={{ fontSize: 20, marginBottom: 4 }}>{role.icon}</div>
@@ -63,7 +63,7 @@ export default function SignIn({ onSignIn }) {
           <Btn onClick={() => onSignIn('customer')} style={{ marginTop: 8 }}>CREATE ACCOUNT & START EARNING</Btn>
 
           {/* Perks */}
-          <div style={{ border: '1px solid var(--red)', borderRadius: 'var(--r)', overflow: 'hidden', marginTop: 24 }}>
+          <div style={{ border: '1px solid #D43D2F', borderRadius: '8px', overflow: 'hidden', marginTop: 24 }}>
             <div style={{ background: '#D43D2F', color: '#fff', padding: '10px 16px', fontFamily: V.font_display, fontSize: 16 }}>WHAT YOU GET</div>
             <div style={{ padding: 16, background: '#f5f5f2' }}>
               {[
@@ -95,26 +95,26 @@ function Wrap({ children }) {
 }
 
 function Box({ children }) {
-  return <div style={{ background: '#fff', border: '1px solid #e5e5e5', borderRadius: 'var(--r)', padding: 32, width: '100%', maxWidth: 420 }}>{children}</div>
+  return <div style={{ background: '#fff', border: '1px solid #e5e5e5', borderRadius: '8px', padding: 32, width: '100%', maxWidth: 420 }}>{children}</div>
 }
 
 function Btn({ children, onClick, style = {} }) {
-  return <button onClick={onClick} style={{ width: '100%', padding: '16px 20px', background: '#D43D2F', color: '#fff', fontFamily: "'Squada One', cursive", fontSize: 20, fontWeight: 700, border: 'none', cursor: 'pointer', borderRadius: 'var(--r)', ...style }}>{children}</button>
+  return <button onClick={onClick} style={{ width: '100%', padding: '16px 20px', background: '#D43D2F', color: '#fff', fontFamily: "'Squada One', cursive", fontSize: 20, fontWeight: 700, border: 'none', cursor: 'pointer', borderRadius: '8px', ...style }}>{children}</button>
 }
 
 function BtnOutline({ children, onClick }) {
-  return <button onClick={onClick} style={{ width: '100%', padding: '16px 20px', background: 'transparent', color: '#1a1a1a', fontFamily: "'Squada One', cursive", fontSize: 20, fontWeight: 700, border: '1px solid #e5e5e5', cursor: 'pointer', borderRadius: 'var(--r)', marginTop: 8 }}>{children}</button>
+  return <button onClick={onClick} style={{ width: '100%', padding: '16px 20px', background: 'transparent', color: '#1a1a1a', fontFamily: "'Squada One', cursive", fontSize: 20, fontWeight: 700, border: '1px solid #e5e5e5', cursor: 'pointer', borderRadius: '8px', marginTop: 8 }}>{children}</button>
 }
 
 function BtnGhost({ children, onClick }) {
-  return <button onClick={onClick} style={{ width: '100%', padding: '12px 20px', background: 'transparent', color: '#999', fontFamily: "'Squada One', cursive", fontSize: 16, fontWeight: 700, border: '1px solid #e5e5e5', cursor: 'pointer', borderRadius: 'var(--r)' }}>{children}</button>
+  return <button onClick={onClick} style={{ width: '100%', padding: '12px 20px', background: 'transparent', color: '#999', fontFamily: "'Squada One', cursive", fontSize: 16, fontWeight: 700, border: '1px solid #e5e5e5', cursor: 'pointer', borderRadius: '8px' }}>{children}</button>
 }
 
 function Field({ label, value, onChange, placeholder, type = 'text' }) {
   return (
     <div style={{ marginBottom: 14 }}>
       <label style={{ fontFamily: "'Squada One', cursive", fontSize: 12, color: '#999', display: 'block', marginBottom: 4 }}>{label}</label>
-      <input type={type} value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder} style={{ width: '100%', padding: '14px 16px', border: '1px solid #e5e5e5', background: '#f5f5f2', color: '#1a1a1a', fontSize: 15, fontFamily: "'Albert Sans', sans-serif", borderRadius: 'var(--r)' }} />
+      <input type={type} value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder} style={{ width: '100%', padding: '14px 16px', border: '1px solid #e5e5e5', background: '#f5f5f2', color: '#1a1a1a', fontSize: 15, fontFamily: "'Albert Sans', sans-serif", borderRadius: '8px' }} />
     </div>
   )
 }

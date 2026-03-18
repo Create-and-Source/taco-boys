@@ -51,7 +51,7 @@ export default function Admin({ onBack }) {
             <button key={item.id} onClick={() => setTab(item.id)} style={{
               display: 'flex', alignItems: 'center', gap: 10, padding: '10px 10px', textAlign: 'left', width: '100%',
               background: tab === item.id ? 'rgba(233,61,61,0.15)' : 'transparent',
-              color: tab === item.id ? '#D43D2F' : 'var(--muted)',
+              color: tab === item.id ? '#D43D2F' : '#999',
               fontSize: 13, fontWeight: tab === item.id ? 700 : 400, whiteSpace: 'nowrap',
               transition: 'all 0.2s', borderLeft: tab === item.id ? '3px solid #D43D2F' : '3px solid transparent',
             }}>
@@ -75,13 +75,13 @@ export default function Admin({ onBack }) {
           {[
             { label: 'TODAY', value: `$${todayRev.toLocaleString()}`, sub: `${todayOrd.length} orders` },
             { label: 'THIS WEEK', value: `$${weekRev.toLocaleString()}`, sub: '' },
-            { label: 'ACTIVE', value: activeOrders.length, sub: 'orders now', color: activeOrders.length > 0 ? '#37ca37' : 'var(--muted)' },
+            { label: 'ACTIVE', value: activeOrders.length, sub: 'orders now', color: activeOrders.length > 0 ? '#37ca37' : '#999' },
             { label: 'CUSTOMERS', value: customers.length, sub: 'total' },
             { label: 'CATERING', value: catering.filter(c => c.status === 'New').length, sub: 'pending', color: '#D43D2F' },
           ].map((k, i) => (
             <div key={k.label} style={{ flex: 1, padding: '16px 12px', borderRight: i < 4 ? B : 'none', textAlign: 'center' }}>
               <div style={{ fontFamily: V.font_mono, fontSize: 9, letterSpacing: '0.15em', color: '#999', marginBottom: 4 }}>{k.label}</div>
-              <div style={{ fontFamily: V.font_display, fontSize: 28, color: k.color || 'var(--text)' }}>{k.value}</div>
+              <div style={{ fontFamily: V.font_display, fontSize: 28, color: k.color || '#1a1a1a' }}>{k.value}</div>
               {k.sub && <div style={{ fontSize: 11, color: '#999' }}>{k.sub}</div>}
             </div>
           ))}
@@ -131,7 +131,7 @@ function DashboardTab({ orders, topItems, activeOrders, onStatus, customers }) {
           {topItems.map((item, i) => (
             <div key={item.name} style={{ display: 'flex', justifyContent: 'space-between', padding: '10px 16px', borderBottom: i < topItems.length - 1 ? B : 'none', alignItems: 'center' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                <span style={{ fontFamily: V.font_display, fontSize: 16, color: i === 0 ? '#D43D2F' : 'var(--text2)', minWidth: 28 }}>#{i + 1}</span>
+                <span style={{ fontFamily: V.font_display, fontSize: 16, color: i === 0 ? '#D43D2F' : '#999', minWidth: 28 }}>#{i + 1}</span>
                 <span style={{ fontSize: 14, fontWeight: 600 }}>{item.name}</span>
               </div>
               <span style={{ fontFamily: V.font_mono, fontSize: 12, color: '#999' }}>{item.qty} sold</span>
@@ -188,7 +188,7 @@ function OrdersTab({ orders, onStatus }) {
       <SectionTitle>ORDERS</SectionTitle>
       <div style={{ display: 'flex', gap: 0, border: B, marginBottom: 16 }}>
         {['All', 'New', 'Preparing', 'Ready', 'Picked Up', 'Delivered'].map(f => (
-          <button key={f} onClick={() => setFilter(f)} style={{ padding: '10px 16px', fontFamily: V.font_display, fontSize: 14, background: filter === f ? '#D43D2F' : 'var(--text)', color: filter === f ? 'var(--text)' : 'var(--text)', borderRight: B, flex: 1 }}>{f.toUpperCase()}</button>
+          <button key={f} onClick={() => setFilter(f)} style={{ padding: '10px 16px', fontFamily: V.font_display, fontSize: 14, background: filter === f ? '#D43D2F' : '#1a1a1a', color: filter === f ? '#1a1a1a' : '#1a1a1a', borderRight: B, flex: 1 }}>{f.toUpperCase()}</button>
         ))}
       </div>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 0, border: B }}>
@@ -212,10 +212,10 @@ function MenuTab() {
             {cat.items.map((item, i) => (
               <div key={item.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 16px', borderBottom: i < cat.items.length - 1 ? B : 'none' }}>
                 <div>
-                  <span style={{ fontWeight: 600, color: enabled[item.id] ? 'var(--text)' : 'var(--text2)' }}>{item.name}</span>
+                  <span style={{ fontWeight: 600, color: enabled[item.id] ? '#1a1a1a' : '#999' }}>{item.name}</span>
                   <span style={{ fontSize: 12, color: '#999', marginLeft: 8 }}>${item.price}</span>
                 </div>
-                <button onClick={() => setEnabled(p => ({ ...p, [item.id]: !p[item.id] }))} style={{ width: 40, height: 22, background: enabled[item.id] ? '#37ca37' : 'var(--border)', position: 'relative', border: 'none', cursor: 'pointer' }}>
+                <button onClick={() => setEnabled(p => ({ ...p, [item.id]: !p[item.id] }))} style={{ width: 40, height: 22, background: enabled[item.id] ? '#37ca37' : '#ddd', position: 'relative', border: 'none', cursor: 'pointer' }}>
                   <div style={{ width: 18, height: 18, background: '#fff', position: 'absolute', top: 2, left: enabled[item.id] ? 20 : 2, transition: 'left 0.2s', boxShadow: '0 1px 3px rgba(0,0,0,0.2)' }} />
                 </button>
               </div>
@@ -359,7 +359,7 @@ function AnalyticsTab({ orders, topItems, weekRev, customers }) {
           <div style={{ fontFamily: V.font_display, fontSize: 18, marginBottom: 12 }}>TOP ITEMS</div>
           {topItems.map((item, i) => (
             <div key={item.name} style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 0' }}>
-              <span style={{ fontSize: 13 }}><span style={{ fontFamily: V.font_display, color: i === 0 ? '#D43D2F' : 'var(--text2)', marginRight: 6 }}>#{i + 1}</span>{item.name}</span>
+              <span style={{ fontSize: 13 }}><span style={{ fontFamily: V.font_display, color: i === 0 ? '#D43D2F' : '#999', marginRight: 6 }}>#{i + 1}</span>{item.name}</span>
               <span style={{ fontFamily: V.font_mono, fontSize: 12, color: '#999' }}>{item.qty}</span>
             </div>
           ))}
@@ -401,7 +401,7 @@ function MarketingTab() {
             <div style={{ fontSize: 28, marginBottom: 8 }}>{m.icon}</div>
             <div style={{ fontFamily: V.font_display, fontSize: 18, marginBottom: 4 }}>{m.title}</div>
             <div style={{ fontSize: 13, color: '#999', marginBottom: 12 }}>{m.desc}</div>
-            <button onClick={() => alert(`${m.title} creator opening... This feature sends real ${m.title.toLowerCase()}s to your customer list.`)} style={{ padding: '8px 20px', background: '#D43D2F', color: '#fff', fontFamily: V.font_display, fontSize: 14, border: 'none', cursor: 'pointer', borderRadius: 'var(--r)' }}>{m.btn}</button>
+            <button onClick={() => alert(`${m.title} creator opening... This feature sends real ${m.title.toLowerCase()}s to your customer list.`)} style={{ padding: '8px 20px', background: '#D43D2F', color: '#fff', fontFamily: V.font_display, fontSize: 14, border: 'none', cursor: 'pointer', borderRadius: '8px' }}>{m.btn}</button>
           </div>
         ))}
       </div>
