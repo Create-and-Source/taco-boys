@@ -125,7 +125,7 @@ export default function App() {
         <img src={IMG.hero} alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: 0.5 }} />
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.7) 100%)' }} />
         <div style={{ position: 'relative', zIndex: 2, textAlign: 'center', padding: '0 24px', opacity: heroVis ? 1 : 0, transform: heroVis ? 'none' : 'translateY(20px)', transition: 'all 0.8s ease 0.3s' }}>
-          <img src={IMG.logo} alt="Taco Boy's" style={{ height: 80, margin: '0 auto 24px', filter: 'brightness(0) invert(1)' }} />
+          <img src={IMG.logo} alt="Taco Boy's" style={{ height: 80, margin: '0 auto 24px', filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.5))' }} />
           <h1 style={{ fontFamily: V.font_display, fontSize: 'clamp(48px, 12vw, 120px)', color: '#fff', lineHeight: 0.95, letterSpacing: '0.04em', marginBottom: 16 }}>
             MESQUITE GRILLED<br /><span style={{ color: 'var(--red)' }}>SINCE 2019</span>
           </h1>
@@ -420,7 +420,7 @@ export default function App() {
 
       {/* ═══ FOOTER ═══ */}
       <footer style={{ padding: '40px 24px', textAlign: 'center', borderTop: B }}>
-        <img src={IMG.logo} alt="Taco Boy's" style={{ height: 50, margin: '0 auto 12px', filter: 'brightness(0) invert(1)' }} />
+        <img src={IMG.logo} alt="Taco Boy's" style={{ height: 50, margin: '0 auto 12px' }} />
         <div style={{ fontFamily: V.font_mono, fontSize: 9, letterSpacing: '0.2em', color: 'var(--muted)', marginBottom: 16 }}>SONORAN STYLE SINCE 2019</div>
         <div style={{ display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap', marginBottom: 16 }}>
           {[['Menu', '#menu'], ['Catering', '#catering'], ['Locations', '#locations'], ['Sign In', '#signin'], ['Instagram', 'https://instagram.com/aztacoboys']].map(([l, h]) => (
@@ -539,7 +539,7 @@ function Nav({ cartCount, onCartClick, mobileNav, setMobileNav }) {
     <>
       <nav style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 200, height: 64, display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 24px', background: scrolled ? 'rgba(26,21,18,0.95)' : 'transparent', backdropFilter: scrolled ? 'blur(16px)' : 'none', borderBottom: scrolled ? '1px solid var(--border)' : '1px solid transparent', transition: 'all 0.3s ease' }}>
         <a href="#" style={{ display: 'flex', alignItems: 'center' }}>
-          <img src={IMG.logo} alt="Taco Boy's" style={{ height: 40, objectFit: 'contain', filter: 'brightness(0) invert(1)' }} />
+          <img src={IMG.logo} alt="Taco Boy's" style={{ height: 40, objectFit: 'contain' }} />
         </a>
         <div style={{ display: 'flex', gap: 20, alignItems: 'center' }} className="nav-desktop">
           {['Menu', 'Catering', 'Locations'].map(l => <a key={l} href={`#${l.toLowerCase()}`} style={{ fontFamily: V.font_display, fontSize: 18, color: '#fff' }}>{l.toUpperCase()}</a>)}
